@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block title %}System Admin Overview - MyHealth{% endblock title %}
+
+{% block content %}
+<section class="page-section" id="doctoroverview">
+  <div class="container">
+    <div style="min-height: 50px;"></div>
+    <div>
+      <h3 class="section-heading text-uppercase">Overview</h3>
+    </div>
+    <div class="row">
+      <div class="col-lg-5 doctoroverview">
+        <h4 class="overviewtitle">Clinics</h4>
+        <div>
+          <table class="overviewappointment">
+            <thead style="font-weight: 550;">
+              <th style="width:50%;">Clinic Name</th>
+              <th style="width:30%;">Type of Clinic</th>
+              <th style="width:20%;">Location</th>
+            </thead>
+            <tbody>
+              {% for clinic in clinics %}
+              <tr>
+                <td>{{ clinic.name }}</td>
+                <td>{{ clinic.type }}</td>
+                <td>{{ clinic.location }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-lg-5 doctoroverview">
+        <h4 class="overviewtitle">Clinic Admins</h4>
+        <div>
+          <table class="overviewappointment">
+            <thead style="font-weight: 550;">
+              <th style="width:70%;">Clinic</th>
+              <th style="width:30%;">No. of Admins</th>
+            </thead>
+            <tbody>
+              {% for name, count in clinicsadmin.items %}
+              <tr>
+                <td>{{ name }}</td>
+                <td>{{ count }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
+
+    <!-- <main>
+      <section class="page-section" id="doctoroverview">
+        <div class="container">
+          <div style="min-height: 50px;"></div>
+          <div>
+            <h3 class="section-heading text-uppercase">Overview</h3>
+          </div>
+          <div class="row">
+            <div class="col-lg-5 doctoroverview">
+              <h4 class="overviewtitle">Clinics</h4>
+              <div>
+                <table class="overviewappointment">
+                  <thead style="font-weight: 550;">
+                    <th style="width:50%;">Clinic Name</th>
+                    <th style="width:30%;">Type of Clinic</th>
+                    <th style="width:20%;">Location</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Clinic 1</td>
+                      <td>Private</td>
+                      <td>North</td>
+                    </tr>
+                    <tr>
+                      <td>Clinic 2</td>
+                      <td>Private</td>
+                      <td>South</td>
+                    </tr>
+                    <tr>
+                      <td>Clinic 3</td>
+                      <td>Private</td>
+                      <td>East</td>
+                    </tr>
+                    <tr>
+                      <td>Clinic 4</td>
+                      <td>Private</td>
+                      <td>West</td>
+                    </tr>
+                    <tr>
+                      <td>Clinic 5</td>
+                      <td>Private</td>
+                      <td>Central</td>
+                    </tr>
+                    <tr>
+                      <td>Clinic 6</td>
+                      <td>Private</td>
+                      <td>West</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-lg-5 doctoroverview">
+              <h4 class="overviewtitle">Clinic Admins</h4>
+              <div>
+                <table class="overviewappointment">
+                  <thead style="font-weight: 550;">
+                    <th style="width:70%;">Clinic</th>
+                    <th style="width:30%;">No. of Admins</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Clinic 1</td>
+                      <td>2</td>
+                    </tr>
+                    <tr>
+                      <td>Clinic 2</td>
+                      <td>1</td>
+                    </tr>
+                    <tr>
+                      <td>Clinic 3</td>
+                      <td>4</td>
+                    </tr>
+                    <tr>
+                      <td>Clinic 4</td>
+                      <td>4</td>
+                    </tr>
+                    <tr>
+                      <td>Clinic 5</td>
+                      <td>3</td>
+                    </tr>
+                    <tr>
+                      <td>Clinic 6</td>
+                      <td>1</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main> -->

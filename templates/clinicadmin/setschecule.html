@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Clinic Admin Set Doctor Work Schedule - MyHealth{% endblock title %}
+
+{% block headerlinks %}
+<link href="{% static 'css/jquery.timepicker.min.css' %}"  rel="stylesheet" />
+<script src="{% static 'js/jquery.timepicker.min.js' %}" type="text/javascript"></script>       
+{% endblock %}
+
+{% block content %}
+<section class="page-section" id="doctorappointments">
+  <div class="container">
+    <div style="min-height: 50px;"></div>
+    <div>
+      <h3 class="section-heading text-uppercase">Set Work Schedule</h3>
+    </div>
+    <div class="row">
+      <form class="doctorappointment" method="post">
+        {% csrf_token %}
+        {% if form.errors %}
+          {% for field in form %}
+              {% for error in field.errors %}
+                  <div class="alert alert-danger">
+                      <strong>{{ error|escape }}</strong>
+                  </div>
+              {% endfor %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+              <div class="alert alert-danger">
+                  <strong>{{ error|escape }}</strong>
+              </div>
+          {% endfor %}
+        {% endif %}
+        {{ form.doctorid.as_hidden }}
+        <table class="formtableoverview">
+         <tr>
+            <td class="tableoverviewleft"><label for="id_email">Schedule: </label>&nbsp;</td>
+            <td>
+              <table border="0" style="width:100%; margin-bottom: 2rem;">
+                <thead style="text-align: center;">
+                  <th></th>
+                  <th>Start</th>
+                  <th>End</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><label for="id_scheduleweekday" class="schedulelabel">Weekdays: </label>&nbsp;</td>
+                    <td>{{ form.weekdaystart }}</td>
+                    <td>{{ form.weekdayend }}</td>
+                  </tr>
+                  <tr>
+                    <td><label for="id_schedulesaturday" class="schedulelabel">Saturday: </label>&nbsp;</td>
+                    <td>{{ form.satstart }}</td>
+                    <td>{{ form.satend }}</td>
+                  </tr>
+                  <tr>
+                    <td><label for="id_schedulesunday" class="schedulelabel">Sunday: </label>&nbsp;</td>
+                    <td>{{ form.sunstart }}</td>
+                    <td>{{ form.sunend }}</td>
+                  </tr>
+                  <tr>
+                    <td><label for="id_scheduleph" class="schedulelabel">Public Holidays: </label>&nbsp;</td>
+                    <td>{{ form.phstart }}</td>
+                    <td>{{ form.phend }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <div class="rightbutton">
+          <button type="submit" class="submitbtn">Set Schedule</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock content %}
+
+{% block footerscripts %}
+<script src="{% static 'js/ClinicAdmin/docschedule.js' %}" type="text/javascript"></script>       
+{% endblock %}
+
+  <!--   <main>
+      <section class="page-section" id="doctorappointments">
+        <div class="container">
+          <div style="min-height: 50px;"></div>
+          <div>
+            <h3 class="section-heading text-uppercase">Set Work Schedule</h3>
+          </div>
+          <div class="row">
+            <div class="doctorappointment">
+              <table class="formtableoverview">
+               <tr>
+                  <td class="tableoverviewleft"><label for="id_email">Appointment Hours: </label>&nbsp;</td>
+                  <td>
+                    <table border="0" style="width:100%; margin-bottom: 2rem;">
+                      <thead style="text-align: center;">
+                        <th></th>
+                        <th>Start</th>
+                        <th>End</th>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><label for="id_scheduleweekday" class="schedulelabel">Weekdays: </label>&nbsp;</td>
+                          <td><input class="scheduleinput" type="text" id="id_scheduleweekdaystart" name="scheduleweekdaystart" value="24Hrs"></td>
+                          <td><input class="scheduleinput" type="text" id="id_scheduleweekdayend" name="scheduleweekdayend" value="24Hrs"></td>
+                        </tr>
+                        <tr>
+                          <td><label for="id_schedulesaturday" class="schedulelabel">Saturday: </label>&nbsp;</td>
+                          <td><input class="scheduleinput" type="text" id="id_schedulesaturdaystart" name="schedulesaturdaystart" value="24Hrs"></td>
+                          <td><input class="scheduleinput" type="text" id="id_schedulesaturdayend" name="schedulesaturdayend" value="24Hrs"></td>
+                        </tr>
+                        <tr>
+                          <td><label for="id_schedulesunday" class="schedulelabel">Sunday: </label>&nbsp;</td>
+                          <td><input class="scheduleinput" type="text" id="id_schedulesundaystart" name="schedulesundaystart" value="24Hrs"></td>
+                          <td><input class="scheduleinput" type="text" id="id_schedulesundayend" name="schedulesundayend" value="24Hrs"></td>
+                        </tr>
+                        <tr>
+                          <td><label for="id_scheduleph" class="schedulelabel">Public Holidays: </label>&nbsp;</td>
+                          <td><input class="scheduleinput" type="text" id="id_schedulephstart" name="schedulephstart" value="24Hrs"></td>
+                          <td><input class="scheduleinput" type="text" id="id_schedulephend" name="schedulephend" value="24Hrs"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+ -->

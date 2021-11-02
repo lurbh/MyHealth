@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block title %}System Admin View Clinics - MyHealth{% endblock title %}
+
+{% block content %}
+<section class="page-section" id="doctoroverview">
+  <div class="container">
+    <div style="min-height: 50px;"></div>
+    <div>
+      <h3 class="section-heading text-uppercase">Clinics</h3>
+    </div>
+    <div class="row">
+      <div class="adminhealthfacilities">
+        <table class="adminhealthfacilitiestable">
+          <thead style="font-weight: 550;">
+            <th style="width:40%;">Clinic Name</th>
+            <th style="width:15%;">Type of Clinic</th>
+            <th style="width:15%;">Location</th>
+            <th style="width:10%;">View</th>
+            <th style="width:10%;">Edit</th>
+            <th style="width:10%;">Delete</th>
+          </thead>
+          <tbody>
+            {% for clinic in clinics %}
+            <tr>
+              <td>{{ clinic.name }}</td>
+              <td>{{ clinic.type }}</td>
+              <td>{{ clinic.location }}</td>
+              <td class="tablebutton"><a href="{% url 'sadminclinic' clinic.id %}" class="button confirmbtn">View</a></td>
+              <td class="tablebutton"><a href="{% url 'sadmineditclinic' clinic.id %}" class="button editbtn">Edit</a></td>
+              <td class="tablebutton"><a href="{% url 'sadmindeleteclinic' clinic.id %}" 
+                  onclick="return confirm('Are you sure you want to delete this?');" class="button cancelbtn">Delete</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="adminhealthfacilitiesbtnholder">
+        <!-- <button class="adminhealthfacilitiesbtn">Add Clinic</button> -->
+        <a href="{% url 'sadmincliniccreate' %}" class="button adminhealthfacilitiesbtn">Add Clinic</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
+
+   <!--  <main>
+      <section class="page-section" id="doctoroverview">
+        <div class="container">
+          <div style="min-height: 50px;"></div>
+          <div>
+            <h3 class="section-heading text-uppercase">Clinics</h3>
+          </div>
+          <div class="row">
+            <div class="adminhealthfacilities">
+              <table class="adminhealthfacilitiestable">
+                <thead style="font-weight: 550;">
+                  <th style="width:40%;">Clinic Name</th>
+                  <th style="width:15%;">Type of Clinic</th>
+                  <th style="width:15%;">Location</th>
+                  <th style="width:10%;">View</th>
+                  <th style="width:10%;">Edit</th>
+                  <th style="width:10%;">Delete</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Clinic 1</td>
+                    <td>Clinic</td>
+                    <td>North</td>
+                    <td class="tablebutton"><button class="confirmbtn">View</button></td>
+                    <td class="tablebutton"><button class="editbtn">Edit</button></td>
+                    <td class="tablebutton"><button class="cancelbtn">Delete</button></td>
+                  </tr>
+                  <tr>
+                    <td>Clinic 2</td>
+                    <td>Clinic</td>
+                    <td>South</td>
+                    <td class="tablebutton"><button class="confirmbtn">View</button></td>
+                    <td class="tablebutton"><button class="editbtn">Edit</button></td>
+                    <td class="tablebutton"><button class="cancelbtn">Delete</button></td>
+                  </tr>
+                  <tr>
+                    <td>Clinic 3</td>
+                    <td>Clinic</td>
+                    <td>East</td>
+                    <td class="tablebutton"><button class="confirmbtn">View</button></td>
+                    <td class="tablebutton"><button class="editbtn">Edit</button></td>
+                    <td class="tablebutton"><button class="cancelbtn">Delete</button></td>
+                  </tr>
+                  <tr>
+                    <td>Clinic 4</td>
+                    <td>Clinic</td>
+                    <td>West</td>
+                    <td class="tablebutton"><button class="confirmbtn">View</button></td>
+                    <td class="tablebutton"><button class="editbtn">Edit</button></td>
+                    <td class="tablebutton"><button class="cancelbtn">Delete</button></td>
+                  </tr>
+                  <tr>
+                    <td>Clinic 5</td>
+                    <td>Clinic</td>
+                    <td>Central</td>
+                    <td class="tablebutton"><button class="confirmbtn">View</button></td>
+                    <td class="tablebutton"><button class="editbtn">Edit</button></td>
+                    <td class="tablebutton"><button class="cancelbtn">Delete</button></td>
+                  </tr>
+                  <tr>
+                    <td>Clinic 6</td>
+                    <td>Clinic</td>
+                    <td>West</td>
+                    <td class="tablebutton"><button class="confirmbtn">View</button></td>
+                    <td class="tablebutton"><button class="editbtn">Edit</button></td>
+                    <td class="tablebutton"><button class="cancelbtn">Delete</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="adminhealthfacilitiesbtnholder">
+              <button class="adminhealthfacilitiesbtn">Add Clinic</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main> -->

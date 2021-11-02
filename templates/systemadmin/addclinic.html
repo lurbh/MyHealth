@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block title %}System Admin Add Clinics - MyHealth{% endblock title %}
+
+{% block content %}
+<section class="page-section" id="doctoroverview">
+  <div class="container">
+    <div style="min-height: 50px;"></div>
+    <div>
+      <h3 class="section-heading text-uppercase">Add Clinic</h3>
+    </div>
+    <div class="row">
+      <form class="doctoredit" method="post">
+        {% csrf_token %}
+        <table border="0" class="formdoctoreditschedule">
+          <tbody>
+            <tr>
+              <td class="editscheduletdleft"><label for="id_name">Clinic Name</label>&nbsp;</td>
+              <td class="editscheduletdright">
+                {{ form.name }}
+              </td>
+            </tr>
+            <tr>
+              <td class="editscheduletdleft"><label for="id_type">Type of Clinic</label>&nbsp;</td>
+              <td class="editscheduletdright">
+                {{ form.type }}
+              </td>
+            </tr>
+            <tr>
+              <td class="editscheduletdleft"><label for="id_location">Location</label>&nbsp;</td>
+              <td class="editscheduletdright">
+                {{ form.location }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row ">
+          <div class="col-lg-5">
+          <button type="submit" class="editsubmitbtn">Create Clinic</button>
+        </div>
+        <div class="col-lg-2">
+        </div>
+        <div class="col-lg-5">
+          <!-- <button type="button" class="editcancelbtn">Cancel</button> -->
+          <a href="{% url 'sadminclinics' %}" class="button editcancelbtn">Cancel</a>
+        </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock content %}
+
+  <!--   <main>
+      <section class="page-section" id="doctoroverview">
+        <div class="container">
+          <div style="min-height: 50px;"></div>
+          <div>
+            <h3 class="section-heading text-uppercase">Add Clinic</h3>
+          </div>
+          <div class="row">
+            <form class="doctoredit">
+              <table border="0" class="formdoctoreditschedule">
+                <tbody>
+                  <tr>
+                    <td class="editscheduletdleft"><label for="id_endtime">Clinic Name</label>&nbsp;</td>
+                    <td class="editscheduletdright">
+                      <input type="text" name="blockoutreason" class="inputaddhf">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="editscheduletdleft"><label for="id_date1">Type of Clinic</label>&nbsp;</td>
+                    <td class="editscheduletdright">
+                      <select name="type" id="id_type" class="inputaddhf" required>
+                        <option disabled selected value> -- Select a Clinic Type -- </option>
+                        <option value="clinic">Specialist</option>
+                        <option value="Clinic">Normal</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="editscheduletdleft"><label for="id_date1">Location</label>&nbsp;</td>
+                    <td class="editscheduletdright">
+                      <select name="type" id="id_type" class="inputaddhf" required>
+                        <option disabled selected value> -- Select a Clinic Location -- </option>
+                        <option value="north">North</option>
+                        <option value="south">South</option>
+                        <option value="east">East</option>
+                        <option value="west">West</option>
+                        <option value="central">Central</option>
+                      </select>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="row ">
+                <div class="col-lg-5">
+                <button type="submit" class="editsubmitbtn">Create Clinic</button>
+              </div>
+              <div class="col-lg-2">
+              </div>
+              <div class="col-lg-5">
+                <button type="button" class="editcancelbtn">Cancel</button>
+              </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main> -->

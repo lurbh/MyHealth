@@ -1,0 +1,6 @@
+Appointment Confirmed
+for {{ name }}
+
+What: Appointment: {{ appointment }}
+When: {{ when }}
+Where: {{ where }} @ {{ room }}

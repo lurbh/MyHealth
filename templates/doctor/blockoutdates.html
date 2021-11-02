@@ -1,0 +1,351 @@
+{% extends 'base.html' %}
+
+{% block title %}Doctor Block Out Dates - MyHealth{% endblock title %}
+
+{% block content %}
+<section class="page-section" id="doctoroverview">
+  <div class="container">
+    <div style="min-height: 50px;"></div>
+    <div>
+      <h3 class="section-heading text-uppercase">Block Out Dates</h3>
+    </div>
+    <div class="row">
+      <form class="doctoredit">
+        <table border="0" class="formdoctoreditschedule">
+          <tbody>
+            <tr>
+              <td class="editscheduletdleft"><label for="id_endtime">Block Out Reason</label>&nbsp;</td>
+              <td class="editscheduletdright">
+                <input type="text" name="blockoutreason" class="blockout">
+              </td>
+            </tr>
+            <tr>
+              <td class="editscheduletdleft"><label for="id_date1">Date Start</label>&nbsp;</td>
+              <td class="editscheduletdright">
+                <div class="row daterow">
+                  <div class="col-lg-3">
+                    <select name="daystart" id="id_daystart" class="inputday" required>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                      <option value="13">13</option>
+                      <option value="14">14</option>
+                      <option value="15">15</option>
+                      <option value="16">16</option>
+                      <option value="17">17</option>
+                      <option value="18">18</option>
+                      <option value="19">19</option>
+                      <option value="20">20</option>
+                      <option value="21">21</option>
+                      <option value="22">22</option>
+                      <option value="23">23</option>
+                      <option value="24">24</option>
+                      <option value="25">25</option>
+                      <option value="26">26</option>
+                      <option value="27">27</option>
+                      <option value="28">28</option>
+                      <option value="29">29</option>
+                      <option value="30">30</option>
+                      <option value="31">31</option>
+                    </select>
+                  </div>
+                  <div class="col-lg-1"><label class="datelabel">/</label></div>
+                  <div class="col-lg-3">
+                    <select name="monthstart" id="id_monthstart" class="inputmonth" required>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                    </select>
+                  </div>
+                  <div class="col-lg-1"><label class="datelabel">/</label></div>
+                  <div class="col-lg-4">
+                    <select name="yearstart" id="id_yearstart" class="inputyear" required>
+                      <option value="2021">2021</option>
+                      <option value="2022">2022</option>
+                      <option value="2023">2023</option>
+                      <option value="2024">2024</option>
+                      <option value="2025">2025</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="editscheduletdleft"><label for="id_date1">Date End</label>&nbsp;</td>
+              <td class="editscheduletdright">
+                <div class="row daterow">
+                  <div class="col-lg-3">
+                    <select name="dayend" id="id_dayend" class="inputday" required>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                      <option value="13">13</option>
+                      <option value="14">14</option>
+                      <option value="15">15</option>
+                      <option value="16">16</option>
+                      <option value="17">17</option>
+                      <option value="18">18</option>
+                      <option value="19">19</option>
+                      <option value="20">20</option>
+                      <option value="21">21</option>
+                      <option value="22">22</option>
+                      <option value="23">23</option>
+                      <option value="24">24</option>
+                      <option value="25">25</option>
+                      <option value="26">26</option>
+                      <option value="27">27</option>
+                      <option value="28">28</option>
+                      <option value="29">29</option>
+                      <option value="30">30</option>
+                      <option value="31">31</option>
+                    </select>
+                  </div>
+                  <div class="col-lg-1"><label class="datelabel">/</label></div>
+                  <div class="col-lg-3">
+                    <select name="monthend" id="id_monthend" class="inputmonth" required>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                    </select>
+                  </div>
+                  <div class="col-lg-1"><label class="datelabel">/</label></div>
+                  <div class="col-lg-4">
+                    <select name="yearend" id="id_yearend" class="inputyear" required>
+                      <option value="2021">2021</option>
+                      <option value="2022">2022</option>
+                      <option value="2023">2023</option>
+                      <option value="2024">2024</option>
+                      <option value="2025">2025</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row ">
+          <div class="col-lg-5">
+          <button type="submit" class="editsubmitbtn">Submit</button>
+        </div>
+        <div class="col-lg-2">
+        </div>
+        <div class="col-lg-5">
+          <!-- <button type="button" class="editcancelbtn">Cancel</button> -->
+          <a href="{% url 'docschedule' %}" class="button editcancelbtn">Cancel</a>
+        </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock content %}
+
+  <!--   <main>
+      <section class="page-section" id="doctoroverview">
+        <div class="container">
+          <div style="min-height: 50px;"></div>
+          <div>
+            <h3 class="section-heading text-uppercase">Block Out Dates</h3>
+          </div>
+          <div class="row">
+            <form class="doctoredit">
+              <table border="0" class="formdoctoreditschedule">
+                <tbody>
+                  <tr>
+                    <td class="editscheduletdleft"><label for="id_endtime">Block Out Reason</label>&nbsp;</td>
+                    <td class="editscheduletdright">
+                      <input type="text" name="blockoutreason" class="blockout">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="editscheduletdleft"><label for="id_date1">Date Start</label>&nbsp;</td>
+                    <td class="editscheduletdright">
+                      <div class="row daterow">
+                        <div class="col-lg-3">
+                          <select name="daystart" id="id_daystart" class="inputday" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                          </select>
+                        </div>
+                        <div class="col-lg-1"><label class="datelabel">/</label></div>
+                        <div class="col-lg-3">
+                          <select name="monthstart" id="id_monthstart" class="inputmonth" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                          </select>
+                        </div>
+                        <div class="col-lg-1"><label class="datelabel">/</label></div>
+                        <div class="col-lg-4">
+                          <select name="yearstart" id="id_yearstart" class="inputyear" required>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                          </select>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="editscheduletdleft"><label for="id_date1">Date End</label>&nbsp;</td>
+                    <td class="editscheduletdright">
+                      <div class="row daterow">
+                        <div class="col-lg-3">
+                          <select name="dayend" id="id_dayend" class="inputday" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                          </select>
+                        </div>
+                        <div class="col-lg-1"><label class="datelabel">/</label></div>
+                        <div class="col-lg-3">
+                          <select name="monthend" id="id_monthend" class="inputmonth" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                          </select>
+                        </div>
+                        <div class="col-lg-1"><label class="datelabel">/</label></div>
+                        <div class="col-lg-4">
+                          <select name="yearend" id="id_yearend" class="inputyear" required>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                          </select>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="row ">
+                <div class="col-lg-5">
+                <button type="submit" class="editsubmitbtn">Submit</button>
+              </div>
+              <div class="col-lg-2">
+              </div>
+              <div class="col-lg-5">
+                <button type="button" class="editcancelbtn">Cancel</button>
+              </div>
+              </div>
+            </form>
+          </div>
+        </div>
+       
+      </section>
+    </main> -->

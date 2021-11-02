@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Clinic Admin Health Promotional Messages - MyHealth{% endblock title %}
+
+{% block headerlinks %}
+<script type="text/javascript">
+function overlay(id) {
+  el = document.getElementById("popup-" + id);
+  el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+}
+</script>
+{% endblock %}
+
+
+{% block content %}
+<section class="page-section">
+  <div class="container">
+    <div style="min-height: 50px;"></div>
+    <div>
+      <h3 class="section-heading text-uppercase">Health Promotional Messages</h3>
+    </div>
+    <div class="row">
+      <div class="main-background" style="width:100%;">
+      <div style="overflow-y:auto;">
+        <table class="adminaccounttable">
+          <tr>
+            <th style="width:5%">S/N</th>
+            <th style="width:55%">Title</th>
+            <th style="width:20%">Date</th>
+            <th style="width:20%"></th>
+          </tr>
+          {% for msg in promsgs %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ msg.title }}</td>
+            <td>{{ msg.senddate|date:'d/m/Y' }}</td>
+            <td><a id="open-popup-{{ msg.id }}"  onclick='overlay({{ msg.id }})' class="button small-button greenbtn">View Message</a></td>
+          </tr>
+          {% endfor %}
+        </table>
+        <br><!-- <input type="button" class="overvieweditbutton" value="Upload"> -->
+        <a href="{% url 'cadminuploadpromotion' %}" class="button overvieweditbutton">Upload</a>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+{% for msg in promsgs %}
+<div id="popup-{{ msg.id }}" class="popup">
+  <div class="popup-content">
+    <div style="float: right;">
+      <a href='' onclick='overlay({{ msg.id }})' class="xbutton"> <i class="fa fa-times" aria-hidden="true"></i></a>
+    </div>
+    <h1>{{ msg.title }}</h1>
+    <h3>{{ msg.senddate|date:'d/m/Y  H : i' }}</h3>
+    <p>{{ msg.content }}</p>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock content %}
+
+<!--     <main>
+      <section class="page-section">
+        <div class="container">
+          <div style="min-height: 50px;"></div>
+          <div>
+            <h3 class="section-heading text-uppercase">Health Promotional Messages</h3>
+          </div>
+          <div class="row">
+            <div class="main-background" style="width:100%;">
+            <div style="overflow-y:auto;">
+              <table class="adminaccounttable">
+                <tr>
+                  <th style="width:5%">S/N</th>
+                  <th style="width:55%">Title</th>
+                  <th style="width:20%">Date</th>
+                  <th style="width:20%"></th>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>Steps to COVID-19 Prevention</td>
+                  <td>14/9/2021</td>
+                  <td><input type="button" class="small-button" value="View Message" style="background-color:#73FF04;"></td>
+                </tr>
+              </table>
+              <br><input type="button" class="overvieweditbutton" value="Upload">
+            </div>
+          </div>
+          </div>
+        </div>
+      </section>
+    </main> -->

@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block title %}Doctor Overview - MyHealth{% endblock title %}
+
+{% block content %}
+<section class="page-section" id="doctoroverview">
+  <div class="container">
+    <div style="min-height: 50px;"></div>
+    <div>
+      <h3 class="section-heading text-uppercase">Overview</h3>
+    </div>
+    <div class="row">
+      <div class="col-lg-5 doctoroverview">
+        <h4 class="overviewtitle">Weekly Schedule</h4>
+        <div>
+          <table border="0" class="weeklytable">
+            {% for day, values in weekschedule.items %}
+            <tr class="weeklyschedule">
+              <td class="weeklyscheduledate">{{ day|date:'D' }}</td>
+              <td class="weeklyscheduledesc">{{ day|date:'d/m/Y'}}<br>
+              {{ values }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+      <div class="col-lg-5 doctoroverview">
+        <h4 class="overviewtitle">Upcoming Appointments</h4>
+        <div>
+          <table class="overviewappointment">
+            <thead style="font-weight: 550;">
+              <th style="width:50%;">Name</th>
+              <th style="width:25%;">Date</th>
+              <th style="width:25%;">Time</th>
+            </thead>
+            <tbody>
+              {% for appt in appointments %}
+              <tr>
+                <td>{{ appt.patientid }}</td>
+                <td>{{ appt.slot.datetimestart|date:'d/m/Y' }}</td>
+                <td>{{ appt.slot.datetimestart|date:'H:i' }}</td>
+              </tr>
+              {% endfor %}
+              <!-- <tr>
+                <td>Ariel Antonette</td>
+                <td>25/9/2021</td>
+                <td>14:00</td>
+              </tr>
+              <tr>
+                <td>Jimmy Ryan</td>
+                <td>12/9/2021</td>
+                <td>09:30</td>
+              </tr>
+              <tr>
+                <td>Diggory Colt</td>
+                <td>20/9/2021</td>
+                <td>11:00</td>
+              </tr> -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
+
+<!--     <main>
+      <section class="page-section" id="doctoroverview">
+        <div class="container">
+          <div style="min-height: 50px;"></div>
+          <div>
+            <h3 class="section-heading text-uppercase">Overview</h3>
+          </div>
+          <div class="row">
+            <div class="col-lg-5 doctoroverview">
+              <h4 class="overviewtitle">Weekly Schedule</h4>
+              <div>
+                <table border="0" class="weeklytable">
+                  <tr class="weeklyschedule">
+                    <td class="weeklyscheduledate">Sun</td>
+                    <td class="weeklyscheduledesc"></td>
+                  </tr>
+                  <tr class="weeklyschedule">
+                    <td class="weeklyscheduledate">Mon</td>
+                    <td class="weeklyscheduledesc"></td>
+                  </tr>
+                  <tr class="weeklyschedule">
+                    <td class="weeklyscheduledate">Tue</td>
+                    <td class="weeklyscheduledesc"></td>
+                  </tr>
+                  <tr class="weeklyschedule">
+                    <td class="weeklyscheduledate">Wed</td>
+                    <td class="weeklyscheduledesc"></td>
+                  </tr>
+                  <tr class="weeklyschedule">
+                    <td class="weeklyscheduledate">Thu</td>
+                    <td class="weeklyscheduledesc"></td>
+                  </tr>
+                  <tr class="weeklyschedule">
+                    <td class="weeklyscheduledate">Fri</td>
+                    <td class="weeklyscheduledesc"></td>
+                  </tr>
+                  <tr class="weeklyschedule">
+                    <td class="weeklyscheduledate">Sat</td>
+                    <td class="weeklyscheduledesc"></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="col-lg-5 doctoroverview">
+              <h4 class="overviewtitle">Upcoming Appointments</h4>
+              <div>
+                <table class="overviewappointment">
+                  <thead style="font-weight: 550;">
+                    <th style="width:50%;">Name</th>
+                    <th style="width:25%;">Date</th>
+                    <th style="width:25%;">Time</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Ariel Antonette</td>
+                      <td>25/9/2021</td>
+                      <td>14:00</td>
+                    </tr>
+                    <tr>
+                      <td>Jimmy Ryan</td>
+                      <td>12/9/2021</td>
+                      <td>09:30</td>
+                    </tr>
+                    <tr>
+                      <td>Diggory Colt</td>
+                      <td>20/9/2021</td>
+                      <td>11:00</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main> -->

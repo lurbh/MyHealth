@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Clinic Admin Upload Health Educational Materials - MyHealth{% endblock title %}
+
+{% block content %}
+<section class="page-section">
+  <div class="container">
+    <div style="min-height: 50px;"></div>
+    <div>
+      <h3 class="section-heading text-uppercase">Upload Health Educational Materials</h3>
+    </div>
+    <div class="row">
+      <div class="main-background" style="width:100%;">
+        <form method="post" id="uploadeducationmat" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+          {% endif %}
+          {{ form.clinicid.as_hidden }}
+          <label class="labels" for="materials-title">Title: </label>
+          {{ form.title }}
+          {{ form.content }}
+          <div class="row ">
+            <div class="col-lg-5">
+              <button type="submit" class="editcancelbtn">Upload</button>
+            </div>
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-5">
+              <!-- <button type="button" class="editcancelbtn">Back</button> -->
+              <a href="{% url 'cadmineducation' %}" class="button editcancelbtn">Back</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
+
+    <!-- <main>
+      <section class="page-section">
+        <div class="container">
+          <div style="min-height: 50px;"></div>
+          <div>
+            <h3 class="section-heading text-uppercase">Upload Health Educational Materials</h3>
+          </div>
+          <div class="row">
+            <div class="main-background" style="width:100%;">
+              <label class="labels" for="materials-title">Title: </label>
+              <input class="overviewInput" type="text" id="materials-title" name="materials-title">
+              <input class="overviewInput" type="file" id="id_image" name="image"></td>
+              <div class="row ">
+                <div class="col-lg-5">
+                  <button type="submit" class="editcancelbtn">Upload</button>
+                </div>
+                <div class="col-lg-2">
+                </div>
+                <div class="col-lg-5">
+                  <button type="button" class="editcancelbtn">Back</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main> -->

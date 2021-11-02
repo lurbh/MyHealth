@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% block title %}Past Appointments - MyHealth{% endblock title %}
+
+{% block content %}
+<section class="page-section" id="bookappointment">
+  <div class="container">
+    <div style="min-height: 50px;"></div>
+    <div>
+      <h3 class="section-heading text-uppercase">Past Appointments</h3>
+    </div>
+    <div class="row">
+      <div class="main-background" style="width:100%;">
+        <div style="overflow-y:auto;overflow-x:auto;">
+          <table class="adminaccounttable">
+            <tr>
+            <th style="width:5%;">S/N</th>
+            <th style="width:20%;">Clinic</th>
+            <th style="width:15%;">Doctor</th>
+            <th style="width:15%;">Type</th>
+            <th style="width:13%;">Date</th>
+            <th style="width:10%;">Time</th>
+            <th style="width:12%;">Rating</th>
+            <th style="width:10%;">Rate</th>
+          </tr>
+          {% for appt in appointments %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ appt.clinicid.name }}</td>
+            {% if appt.type.type !=  word %}
+              <td>{{ appt.doctorid.user_account.name }}</td>
+            {% else %}
+              <td>-- N/A --</td>
+            {% endif %}
+            <td>{{ appt.type }}</td>
+            <td>{{ appt.slot.datetimestart|date:'d/m/Y' }}</td>
+            <td>{{ appt.slot.datetimestart|date:'H:i' }}</td>
+            {% if appt.rating ==  0 %}
+            <td>No Rating</td>
+            <td><a href="{% url 'rateappointment' appt.id %}" class="button small-button yellowbtn">Rate</a></td>
+            {% else %}
+            <td>{{ appt.rating }}</td>
+            <td><a href="{% url 'rateappointment' appt.id %}" class="button small-button yellowbtn disabled">Rate</a></td>
+            {% endif %}
+            
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
+
+{% block footer %}
+<footer class="footer py-4">
+  <div class="container">
+      <div class="row align-items-center">
+          <div class="col-lg-2 text-lg-start MyHealth">MyHealth</div>
+          <div class="col-lg-4 text-lg-start">
+            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+              <li class="nav-item"><a class="nav-link" href="#">Support</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">FAQ</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Privacy Policy</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Terms of Use</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 my-3 my-lg-0 text-lg-start">
+            <div >Stay In Touch</div>
+            <br>
+            <div>
+              <a class="btn btn-fb btn-social mx-2" href="#!"><i class="fab fa-facebook-square"></i></a>
+              <a class="btn btn-twitter btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+              <a class="btn btn-linkin btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+              <a class="btn btn-whatsapp btn-social mx-2" href="#!"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 text-lg-start">
+              <div >Subscribe</div>
+              <br>
+              <div>
+                <form method="post">
+                  {% csrf_token %}
+                  {{ subform.email }}
+                  <button type="submit" class="Subscribebtn"><i class="far fa-envelope"></i></button>
+                </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</footer>
+{% endblock footer %}
+
+
+
+   <!--  <main>
+      <section class="page-section" id="bookappointment">
+         <div class="container">
+          <div style="min-height: 50px;"></div>
+          <div>
+            <h3 class="section-heading text-uppercase">Past Appointments</h3>
+          </div>
+          <div class="row appointments">
+            <div class="appointmentscover">
+              <table border="0" class="appointmenttable">
+                <thead style="font-weight: 550;">
+                  <td style="width:5%;">S/N</td>
+                  <td style="width:20%;">Clinic</td>
+                  <td style="width:15%;">Doctor</td>
+                  <td style="width:15%;">Type</td>
+                  <td style="width:10%;">Date</td>
+                  <td style="width:5%;">Time</td>
+                  <td style="width:15%;">Rating</td>
+                  <td style="width:15%;">Rate</td>
+                </thead>
+                <tr class="appointmentrow">
+                  <td>1</td>
+                  <td>Clinic 1</td>
+                  <td>Dr. Marco Polo</td>
+                  <td>Standard Consulation</td>
+                  <td>25/9/2021</td>
+                  <td>15:00</td>
+                  <td>4/5</td>
+                  <td class="tablebutton"><button class="ratebtn">Rate</button></td>
+                </tr>
+                <tr class="appointmentrow">
+                  <td>2</td>
+                  <td>Clinic 1</td>
+                  <td>Dr. Marco Polo</td>
+                  <td>Standard Consulation</td>
+                  <td>25/9/2021</td>
+                  <td>15:00</td>
+                  <td>4/5</td>
+                  <td class="tablebutton"><button class="ratebtn">Rate</button></td>
+                </tr>
+                <tr class="appointmentrow">
+                  <td>3</td>
+                  <td>Clinic 1</td>
+                  <td>Dr. Marco Polo</td>
+                  <td>Standard Consulation</td>
+                  <td>25/9/2021</td>
+                  <td>15:00</td>
+                  <td>4/5</td>
+                  <td class="tablebutton"><button class="ratebtn">Rate</button></td>
+                </tr>
+                <tr class="appointmentrow">
+                  <td>4</td>
+                  <td>Clinic 1</td>
+                  <td>Dr. Marco Polo</td>
+                  <td>Standard Consulation</td>
+                  <td>25/9/2021</td>
+                  <td>15:00</td>
+                  <td>4/5</td>
+                  <td class="tablebutton"><button class="ratebtn">Rate</button></td>
+                </tr>
+                <tr class="appointmentrow">
+                  <td>5</td>
+                  <td>Clinic 1</td>
+                  <td>Dr. Marco Polo</td>
+                  <td>Standard Consulation</td>
+                  <td>25/9/2021</td>
+                  <td>15:00</td>
+                  <td>4/5</td>
+                  <td class="tablebutton"><button class="ratebtn">Rate</button></td>
+                </tr>
+              </table>
+            </div>
+          </div> 
+        </div>
+      </section>
+    </main>
+     -->

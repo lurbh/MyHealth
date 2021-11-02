@@ -1,0 +1,4 @@
+<option value="">---------</option>
+{% for doc in doctors %}
+<option value="{{ doc.user_account.id }}">{{ doc.user_account.name }}</option>
+{% endfor %}

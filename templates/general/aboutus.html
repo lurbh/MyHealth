@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}About Us - MyHealth{% endblock title %}
+
+<!-- {% block navbar %}
+{% if user.is_authenticated %}
+<ul class="navbar-nav text-lg-start ms-auto py-4 py-lg-0">
+  <li class="nav-item"><a class="nav-link" href="#">Clinics</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Book An Appointment</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Appointments</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Account</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
+</ul>
+{% else %}
+<ul class="navbar-nav text-lg-start ms-auto py-4 py-lg-0">
+  <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Clinics</a></li>
+  <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">About Us</a></li>
+  <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Contact Us</a></li>
+  <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+</ul>
+{% endif %}
+{% endblock navbar %} -->
+
+{% block content %}
+<section class="page-section" id="about">
+<div style="min-height: 100px;"></div>
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">About Us</h2>
+        </div>
+        <div class="abtusleft">
+          <h4 class="subheading">Who we Are</h4>
+          <div class="timeline-body">
+            <p class="text-muted">An up and coming start-up, MyHealth is forged from the bonds made during our Final year project, upon which we’ve decided to further develop our project into something much more, something viable, something solid, concrete for the healthcare industry to rely on. We have evolved from a simple project into a full-blown business with exponential growth and propects.</p>
+            <p class="text-muted">At MyHealth we are dedicated into serving the needs of our customers, as a catalyst for the growth of the healthcare industry and to promote the health and well-being of the populace for the good of the world.</p>
+            <p class="text-muted">As part of our growth plan, we are currently aiming to become an icon of the booking for health facilities in Singapore, becoming a household name in Singapore, eventually the whole of Asia, and maybe the world.</p>
+            <p class="text-muted">MyHealth is now solidly positioned for growth and expansion, a pilot program is on the way that serves prove our effectiveness and reliability. Thus, will pave the way for further expansion and contracts.</p>
+            <p class="text-muted">This is just the beginning.</p>
+          </div>
+        </div>
+        <div class="abtusright">
+          <h4 class="subheading">Why Choose Us?</h4>
+          <div class="timeline-body">
+            <p class="text-muted">MyHealth is extensively tested with numerous stress-based performance assessments to ensure top of the line performance and convenience. Giving you the piece of mind that MyHealth is for sure to be reliable and will be able to function rain or shine. </p>
+            <p class="text-muted">Our team has the expertise and resources in order to provide support and continuous development for our services. With close support available 24/7 and an intelligent approach to the business what’s there not to like?</p>
+            <p class="text-muted">Always improving, always evolving choose Myhealth! </p>
+          </div>
+        </div>
+    </div>
+</section>
+<section class="page-section bg-light" id="team">
+  <div class="container">
+      <div class="text-center">
+          <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
+      </div>
+      <div class="row">
+          <div class="col-lg-4">
+              <div class="team-member">
+                  <!-- <img class="mx-auto rounded-circle" src="assets/img/team/1.jpg" alt="..." /> -->
+                  <h4>Pamfilo Moses Joseph Alvaro</h4>
+                  <h6 class="section-subheading text-muted role">Project Manager / User Champion / Documenter</h6>
+                  <p class="text-muted">Moses has a Bsc. Computer Science with a specialisation in Big data, with varied projects in the fields of python development, data science and machine learning he hopes to understand the world and its inner workings through data.</p>
+                  <p class="text-muted">Moses spends his free time learning languages, music and reading translated books as a hobby.</p>
+
+                  <!-- <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+                  <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+                  <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a> -->
+              </div>
+          </div>
+          <div class="col-lg-4">
+              <div class="team-member">
+                  <!-- <img class="mx-auto rounded-circle" src="assets/img/team/2.jpg" alt="..." /> -->
+                  <h4>Myint Thu Aung</h4>
+                  <h6 class="section-subheading text-muted role">User Team Leader / Project Documenter / Front end web developer</h6>
+                  <p class="text-muted">Myint has a Bsc. Computer Science with a specialisation in Business Information Systems.
+                  Analysing business problems and finding computer-based solutions for them is his main specialty.
+                  With a specific interest in UX/UI he expresses his design chops in his work as can be seen in our website!
+                  </p>
+                  <!-- <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+                  <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+                  <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a> -->
+              </div>
+          </div>
+          <div class="col-lg-4">
+              <div class="team-member">
+                  <!-- <img class="mx-auto rounded-circle" src="assets/img/team/3.jpg" alt="..." /> -->
+                  <h4>Lim Soo Min</h4>
+                  <h6 class="section-subheading text-muted role">Document Control Leader / Project Documenter / Secretary</h6>
+                  <p class="text-muted">Soo Min has a BSc. In Computer Science with a specialisation in Business Information Systems.
+                  An expert in python and html, she programs in the niche of web development and service automation with python, creating efficient, convenient and streamlined tools, programs and websites.  
+                  </p>
+                  <p class="text-muted">Soo Min likes to spend her time playing sports, watching YouTube and volunteering! 
+                  </p>
+                  <!-- <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+                  <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+                  <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a> -->
+              </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-lg-6">
+              <div class="team-member">
+                  <!-- <img class="mx-auto rounded-circle" src="assets/img/team/1.jpg" alt="..." /> -->
+                  <h4>Lur Bing Huii</h4>
+                  <h6 class="section-subheading text-muted role">Technical Team Leader / Project Programmer</h6>
+                  <p class="text-muted">Bing Huii has a Bsc. Computer Science with a specialisation in Big data.
+                  As our head programmer he has ensured quality and robust code in the workings of our service.
+                  An expert in a variety of programming languages he is the go-to guy for any development related tasks and questions!
+                  </p>
+                  <!-- <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+                  <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+                  <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a> -->
+              </div>
+          </div>
+          <div class="col-lg-6">
+              <div class="team-member">
+                  <!-- <img class="mx-auto rounded-circle" src="assets/img/team/2.jpg" alt="..." /> -->
+                  <h4>Ng Kai Ren, Ron</h4>
+                  <h6 class="section-subheading text-muted role">Testing Team Leader / Project Programmer</h6>
+                  <p class="text-muted">As our testing team leader, he has ensured that there are little to no bugs left that would impact the reliability of our services. Meticulous and friendly are what describes Ron, he can always be relied on to be thorough in the testing and other tasks given to him. </p>
+                  <!-- <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+                  <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+                  <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a> -->
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+{% endblock content %}
+
+{% block footer %}
+<footer class="footer py-4">
+  <div class="container">
+      <div class="row align-items-center">
+          <div class="col-lg-2 text-lg-start MyHealth">MyHealth</div>
+          <div class="col-lg-4 text-lg-start">
+            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+              <li class="nav-item"><a class="nav-link" href="#">Support</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">FAQ</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Privacy Policy</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Terms of Use</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 my-3 my-lg-0 text-lg-start">
+            <div >Stay In Touch</div>
+            <br>
+            <div>
+              <a class="btn btn-fb btn-social mx-2" href="#!"><i class="fab fa-facebook-square"></i></a>
+              <a class="btn btn-twitter btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+              <a class="btn btn-linkin btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+              <a class="btn btn-whatsapp btn-social mx-2" href="#!"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 text-lg-start">
+              <div >Subscribe</div>
+              <br>
+              <div>
+                <form method="post">
+                  {% csrf_token %}
+                  {{ subform.email }}
+                  <button type="submit" class="Subscribebtn"><i class="far fa-envelope"></i></button>
+                </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</footer>
+{% endblock footer %}
