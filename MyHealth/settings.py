@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-wylyio30rd*)k1)h1pn0w@g-uz@roou3to15%^w(j7)&j$c686'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['MyHealth.ap-southeast-1.elasticbeanstalk.com', '172.31.28.36']
+ALLOWED_HOSTS = ['MyHealth.ap-southeast-1.elasticbeanstalk.com', '127.0.0.1']
 
 
 # Application definition
@@ -154,25 +154,15 @@ AUTH_USER_MODEL = 'users.BaseUser'
 LOGIN_REDIRECT_URL = 'redirect'
 LOGOUT_REDIRECT_URL = 'home'
 
-STATIC_URL = 'static/'
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 ### Django storages - use this for production
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 ### Django storages - use in production
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-#EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-#EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
-
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 #DEFAULT_FROM_EMAIL = 'test@test.com'
 if 'EMAIL_HOST' in os.environ:
