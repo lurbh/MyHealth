@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title %}System Admin Manage Clinic Admin - MyHealth{% endblock title %}
+
+{% block content %}
+<section class="page-section" id="doctoroverview">
+  <div class="container">
+    <div style="min-height: 50px;"></div>
+    <div>
+      <h3 class="section-heading text-uppercase">Manage Clinic Admin</h3>
+    </div>
+    <div class="row">
+      <div class="adminhealthfacilities">
+        <table class="adminhealthfacilitiestable">
+          <thead style="font-weight: 550;">
+            <th style="width:40%;">Clinic Name</th>
+            <th style="width:10%;">No. of Admins</th>
+            <th style="width:10%;">View</th>
+            <th style="width:20%;">Add Admin</th>
+            <th style="width:10%;">Delete</th>
+          </thead>
+          <tbody>
+            {% for cadmin in clinicsadmin %}
+              <tr>
+                <td>{{ cadmin.name }}</td>
+                <td>{{ cadmin.count }}</td>
+                <td class="tablebutton"><a href="{% url 'sadminclinic' cadmin.id %}" class="button confirmbtn">View</a></td>
+                <td class="tablebutton"><a href="{% url 'sadmincadminaddid' cadmin.id %}" class="button editbtn">Add Admin</a></td>
+                <td class="tablebutton"><a href="{% url 'sadmindeleteclinic' cadmin.id %}" 
+                  onclick="return confirm('Are you sure you want to delete this?');" class="button cancelbtn">Delete</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
+
+  <!--   <main>
+      <section class="page-section" id="doctoroverview">
+        <div class="container">
+          <div style="min-height: 50px;"></div>
+          <div>
+            <h3 class="section-heading text-uppercase">Manage Clinic Admin</h3>
+          </div>
+          <div class="row">
+            <div class="adminhealthfacilities">
+              <table class="adminhealthfacilitiestable">
+                <thead style="font-weight: 550;">
+                  <th style="width:40%;">Clinic Name</th>
+                  <th style="width:10%;">No. of Admins</th>
+                  <th style="width:10%;">View</th>
+                  <th style="width:20%;">Add Admin</th>
+                  <th style="width:10%;">Delete</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Clinic 1</td>
+                    <td>2</td>
+                    <td class="tablebutton"><button class="confirmbtn">View</button></td>
+                    <td class="tablebutton"><button class="editbtn">Add Admin</button></td>
+                    <td class="tablebutton"><button class="cancelbtn">Delete</button></td>
+                  </tr>
+                  <tr>
+                    <td>Clinic 2</td>
+                    <td>1</td>
+                    <td class="tablebutton"><button class="confirmbtn">View</button></td>
+                    <td class="tablebutton"><button class="editbtn">Add Admin</button></td>
+                    <td class="tablebutton"><button class="cancelbtn">Delete</button></td>
+                  </tr>
+                  <tr>
+                    <td>Clinic 3</td>
+                    <td>4</td>
+                    <td class="tablebutton"><button class="confirmbtn">View</button></td>
+                    <td class="tablebutton"><button class="editbtn">Add Admin</button></td>
+                    <td class="tablebutton"><button class="cancelbtn">Delete</button></td>
+                  </tr>
+                  <tr>
+                    <td>Clinic 4</td>
+                    <td>4</td>
+                    <td class="tablebutton"><button class="confirmbtn">View</button></td>
+                    <td class="tablebutton"><button class="editbtn">Add Admin</button></td>
+                    <td class="tablebutton"><button class="cancelbtn">Delete</button></td>
+                  </tr>
+                  <tr>
+                    <td>Clinic 5</td>
+                    <td>3</td>
+                    <td class="tablebutton"><button class="confirmbtn">View</button></td>
+                    <td class="tablebutton"><button class="editbtn">Add Admin</button></td>
+                    <td class="tablebutton"><button class="cancelbtn">Delete</button></td>
+                  </tr>
+                  <tr>
+                    <td>Clinic 6</td>
+                    <td>1</td>
+                    <td class="tablebutton"><button class="confirmbtn">View</button></td>
+                    <td class="tablebutton"><button class="editbtn">Add Admin</button></td>
+                    <td class="tablebutton"><button class="cancelbtn">Delete</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main> -->

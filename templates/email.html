@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}Send Email - MyHealth{% endblock %}
+
+<!-- {% block navbar %}
+{% if user.is_authenticated %}
+<ul class="navbar-nav text-lg-start ms-auto py-4 py-lg-0">
+  <li class="nav-item"><a class="nav-link" href="#">Clinics</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Book An Appointment</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Appointments</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Account</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
+</ul>
+{% else %}
+<ul class="navbar-nav text-lg-start ms-auto py-4 py-lg-0">
+  <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Clinics</a></li>
+  <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">About Us</a></li>
+  <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Contact Us</a></li>
+  <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+</ul>
+{% endif %}
+{% endblock %} -->
+
+{% block content %}
+{% if messageSent %}
+  <div class="container">
+    <div style="min-height: 100px;"></div>
+    <div class="text-center">
+        <h3 class="section-heading"><strong>Email successfully sent</strong></h3>
+        <p>Your message was successfully sent to {{ form.cleaned_data.to }}</p>
+    </div>
+  </div>
+  {% else %}
+  <div class="container">
+    <div style="min-height: 100px;"></div>
+    <div class="text-center">
+        <h3 class="section-heading">Send E-mail</h3>
+    </div>
+    <div style="min-height: 75px;"></div>
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <br />
+      <div class="text-center">
+        <input
+          type="submit"
+          class="btn btn-secondary"
+          style="width: 100%"
+          value="Send e-mail"
+        />
+      </div>
+    </form>
+  </div>
+{% endif %}
+{% endblock %}
+
+{% block footer %}
+<footer class="footer py-4">
+  <div class="container">
+      <div class="row align-items-center">
+          <div class="col-lg-2 text-lg-start MyHealth">MyHealth</div>
+          <div class="col-lg-4 text-lg-start">
+            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+              <li class="nav-item"><a class="nav-link" href="#">Support</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">FAQ</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Privacy Policy</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Terms of Use</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 my-3 my-lg-0 text-lg-start">
+            <div >Stay In Touch</div>
+            <br>
+            <div>
+              <a class="btn btn-fb btn-social mx-2" href="#!"><i class="fab fa-facebook-square"></i></a>
+              <a class="btn btn-twitter btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+              <a class="btn btn-linkin btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+              <a class="btn btn-whatsapp btn-social mx-2" href="#!"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 text-lg-start">
+              <div >Subscribe</div>
+              <br>
+              <div>
+                <input class="Subscribe" type="text" name="">
+                <button class="Subscribebtn"><i class="far fa-envelope"></i></button>
+              </div>
+          </div>
+      </div>
+  </div>
+</footer>
+{% endblock %}

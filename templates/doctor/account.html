@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}Doctor Account - MyHealth{% endblock title %}
+
+{% block content %}
+<section class="page-section">
+  <div class="container">
+    <div style="min-height: 50px;"></div>
+    <div>
+      <h3 class="section-heading text-uppercase">Account</h3>
+    </div>
+    <div class="row">
+      <div class="account">
+        <h4 class="accounttitle">Welcome, Dr. {{ doctor.user_account.name }}</h4>
+        <table border="0" class="accounttable">
+          <tbody>
+            <tr>
+              <td style="width: 30%;">Username&emsp;</td>
+              <td>{{ doctor.user_account.username }}</td>
+            </tr>
+            <tr>
+              <td>Name&emsp;</td>
+              <td>{{ doctor.user_account.name }}</td>
+            </tr>
+             <tr>
+              <td style="vertical-align: top;">Specialty&emsp;</td>
+              <td>
+                {% for specialty in doctor.specialty.all %}
+                {{ specialty }}<br>
+                {% endfor %}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row">
+          <div class="col-lg-4"><a href="{% url 'doceditaccount' %}" class="button editaccountbtn">Edit Account</a></div>
+          <div class="col-lg-4"><a href="{% url 'docchagepassword' %}" class="button editaccountbtn">Change Password</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
+
+
+    <!-- <main>
+      <section class="page-section">
+        <div class="container">
+          <div style="min-height: 50px;"></div>
+          <div>
+            <h3 class="section-heading text-uppercase">Account</h3>
+          </div>
+          <div class="row">
+            <div class="account">
+              <h4 class="accounttitle">Welcome, Dr. Marco Polo</h4>
+              <table border="0" class="accounttable">
+                <tbody>
+                  <tr>
+                    <td style="width: 30%;">Username&emsp;</td>
+                    <td>MarcoPolo</td>
+                  </tr>
+                  <tr>
+                    <td>Name&emsp;</td>
+                    <td>Marco Polo</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="row">
+                <div class="col-lg-4"><button class="editaccountbtn">Change Password</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    -->

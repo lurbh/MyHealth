@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Clinic Admin Overview Edit - MyHealth{% endblock title %}
+
+{% block headerlinks %}
+<link href="{% static 'css/jquery.timepicker.min.css' %}"  rel="stylesheet" />
+<script src="{% static 'js/jquery.timepicker.min.js' %}" type="text/javascript"></script>       
+{% endblock %}
+
+{% block content %}
+<section class="page-section">
+  <div class="container">
+    <div style="min-height: 50px;"></div>
+    <div>
+      <h3 class="section-heading text-uppercase">Overview</h3>
+    </div>
+    <div class="row">
+      <form class="adminoverviewedit" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if form.errors %}
+          {% for field in form %}
+              {% for error in field.errors %}
+                  <div class="alert alert-danger">
+                      <strong>{{ error|escape }}</strong>
+                  </div>
+              {% endfor %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+              <div class="alert alert-danger">
+                  <strong>{{ error|escape }}</strong>
+              </div>
+          {% endfor %}
+      {% endif %}
+        <table border="0" class="formtableoverview">
+          <tbody>
+            <tr>
+              <td class="tableoverviewleft"><label for="facility_name">Clinic Name: </label>&nbsp;</td>
+              <td>{{ clinicform.name }}</td>
+            </tr>
+            <tr>
+              <td class="tableoverviewleft"><label for="appt_start">Address:  </label>&nbsp;</td>
+              <td>{{ clinicform.address }}</td>
+            </tr>
+            <tr>
+              <td class="tableoverviewleft"><label for="contact_no">Contact no: </label>&nbsp;</td>
+              <td>{{ clinicform.phone }}</td>
+            </tr>
+            <tr>
+              <td class="tableoverviewleft"><label for="id_email">Email: </label>&nbsp;</td>
+              <td>{{ clinicform.email }}</td>
+            </tr>
+            <tr>
+              <td class="tableoverviewleft"><label for="id_email">Operating Hours: </label>&nbsp;</td>
+              <td>
+                <table border="0" style="width:100%; margin-bottom: 2rem;" id="scheduletableedit">
+                  <thead style="text-align: center;">
+                    <th></th>
+                    <th>Start</th>
+                    <th>End</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><label for="id_scheduleweekday" class="schedulelabel">Weekdays: </label>&nbsp;</td>
+                      <td>{{ hoursform.weekdaystart }}</td>
+                      <td>{{ hoursform.weekdayend }}</td>
+                    </tr>
+                    <tr>
+                      <td><label for="id_schedulesaturday" class="schedulelabel">Saturday: </label>&nbsp;</td>
+                      <td>{{ hoursform.satstart }}</td>
+                      <td>{{ hoursform.satend }}</td>
+                    </tr>
+                    <tr>
+                      <td><label for="id_schedulesunday" class="schedulelabel">Sunday: </label>&nbsp;</td>
+                      <td>{{ hoursform.sunstart }}</td>
+                      <td>{{ hoursform.sunend }}</td>
+                    </tr>
+                    <tr>
+                      <td><label for="id_scheduleph" class="schedulelabel">Public Holidays: </label>&nbsp;</td>
+                      <td>{{ hoursform.phstart }}</td>
+                      <td>{{ hoursform.phend }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableoverviewleft"><label for="id_email">Appointments in an Hour: </label>&nbsp;</td>
+              <td>{{ clinicform.apptinterval }}</td>
+            </tr>
+            <tr>
+              <td class="tableoverviewleft"><label for="id_email">Dortor slots: </label>&nbsp;</td>
+              <td>{{ clinicform.doctorinterval }}</td>
+            </tr>
+            <tr>
+              <td class="tableoverviewleft"><label for="id_image">Image: </label>&nbsp;</td>
+              <td>
+              {% if clinicform.image %}
+                <img src="/media/{{ clinicform.image.value }}"  alt="Health Facility Image" class="overviewimg img-responsive">
+              {% else %}
+                <img src="{% static 'assets/img/HealthFacilityIcon.png' %}"  alt="Health Facility Image" class="overviewimg img-responsive">
+              {% endif %}
+              <br>
+              {{ clinicform.image }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row ">
+          <div class="col-lg-5">
+            <button type="submit" class="editsubmitbtn">Confirm Edit</button>
+          </div>
+          <div class="col-lg-2">
+          </div>
+          <div class="col-lg-5">
+            <!-- <button type="button" class="editcancelbtn">Back</button> -->
+            <a href="{% url 'cadminoverview' %}" class="button editcancelbtn">Back</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock content %}
+
+{% block footerscripts %}
+<script src="{% static 'js/ClinicAdmin/overview.js' %}" type="text/javascript"></script>       
+{% endblock %}
+
+    <!-- <main>
+      <section class="page-section">
+        <div class="container">
+          <div style="min-height: 50px;"></div>
+          <div>
+            <h3 class="section-heading text-uppercase">Overview</h3>
+          </div>
+          <div class="row">
+            <form class="adminoverview">
+              <table border="0" class="formtableoverview">
+                <tbody>
+                  <tr>
+                    <td class="tableoverviewleft"><label for="facility_name">Clinic Name: </label>&nbsp;</td>
+                    <td><input class="overviewInput" type="text" id="facility_name" name="facility_name" value="Singapore General Hospital"></td>
+                  </tr>
+                  <tr>
+                    <td class="tableoverviewleft"><label for="appt_start">Address:  </label>&nbsp;</td>
+                    <td><input class="overviewInput" type="text" id="appt_start" name="appt_start" value="Outram Rd, Singapore 169608"></td>
+                  </tr>
+                  <tr>
+                    <td class="tableoverviewleft"><label for="contact_no">Contact no: </label>&nbsp;</td>
+                    <td><input class="overviewInput" type="text" id="contact_no" name="contact_no" value="6321 4377"></td>
+                  </tr>
+                  <tr>
+                    <td class="tableoverviewleft"><label for="id_email">Email: </label>&nbsp;</td>
+                    <td><input class="overviewInput" type="text" id="id_email" name="email" value="SGH@memail.com"></td>
+                  </tr>
+                  <tr>
+                    <td class="tableoverviewleft"><label for="id_email">Operating Hours: </label>&nbsp;</td>
+                    <td>
+                      <table border="0" style="width:100%; margin-bottom: 2rem;">
+                        <thead style="text-align: center;">
+                          <th></th>
+                          <th>Start</th>
+                          <th>End</th>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><label for="id_scheduleweekday" class="schedulelabel">Weekdays: </label>&nbsp;</td>
+                            <td><input class="scheduleinput" type="text" id="id_scheduleweekdaystart" name="scheduleweekdaystart" value="24Hrs"></td>
+                            <td><input class="scheduleinput" type="text" id="id_scheduleweekdayend" name="scheduleweekdayend" value="24Hrs"></td>
+                          </tr>
+                          <tr>
+                            <td><label for="id_schedulesaturday" class="schedulelabel">Saturday: </label>&nbsp;</td>
+                            <td><input class="scheduleinput" type="text" id="id_schedulesaturdaystart" name="schedulesaturdaystart" value="24Hrs"></td>
+                            <td><input class="scheduleinput" type="text" id="id_schedulesaturdayend" name="schedulesaturdayend" value="24Hrs"></td>
+                          </tr>
+                          <tr>
+                            <td><label for="id_schedulesunday" class="schedulelabel">Sunday: </label>&nbsp;</td>
+                            <td><input class="scheduleinput" type="text" id="id_schedulesundaystart" name="schedulesundaystart" value="24Hrs"></td>
+                            <td><input class="scheduleinput" type="text" id="id_schedulesundayend" name="schedulesundayend" value="24Hrs"></td>
+                          </tr>
+                          <tr>
+                            <td><label for="id_scheduleph" class="schedulelabel">Public Holidays: </label>&nbsp;</td>
+                            <td><input class="scheduleinput" type="text" id="id_schedulephstart" name="schedulephstart" value="24Hrs"></td>
+                            <td><input class="scheduleinput" type="text" id="id_schedulephend" name="schedulephend" value="24Hrs"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="tableoverviewleft"><label for="id_email">Appointments in an Hour: </label>&nbsp;</td>
+                    <td><input class="overviewInput" type="number" id="id_email" name="email" min="1" max="6" value="4"></td>
+                  </tr>
+                  <tr>
+                    <td class="tableoverviewleft"><label for="id_email">Dortor slots: </label>&nbsp;</td>
+                    <td><input class="overviewInput" type="number" id="id_email" name="email" min="1" max="15" value="4"></td>
+                  </tr>
+                  <tr>
+                    <td class="tableoverviewleft"><label for="id_image">Image: </label>&nbsp;</td>
+                    <td><img src="../assets/img/HealthFacilityIcon.png" alt="Health Facility Image" class="overviewimg img-responsive"><br>
+                    <input class="overviewInput" type="file" id="id_image" name="image"></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="row ">
+                <div class="col-lg-5">
+                  <button type="submit" class="editsubmitbtn">Confirm Edit</button>
+                </div>
+                <div class="col-lg-2">
+                </div>
+                <div class="col-lg-5">
+                  <button type="button" class="editcancelbtn">Back</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main> -->

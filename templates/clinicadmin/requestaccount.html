@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}Clinic Admin Request Admin Account - MyHealth{% endblock title %}
+
+{% block content %}
+<section class="page-section">
+  <div class="container">
+    <div style="min-height: 50px;"></div>
+    <div>
+      <h3 class="section-heading text-uppercase">Request Admin Account</h3>
+    </div>
+    <div class="row">
+      <div class="account">
+        <form method="post">
+          {% csrf_token %}
+          {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+          {% endif %}
+          {{ form.clinicid.as_hidden }}
+          <table border="0" class="editaccounttable">
+            <tbody>
+              <tr>
+                <td class="tdleft"><label for="id_adminuser">Admin Username</label></td>
+                <td class="tdright">{{ form.username }}</td>
+              </tr>
+              <tr>
+                <td class="tdleft"><label for="id_adminname">Admin Name</label></td>
+                <td class="tdright">{{ form.name }}</td>
+              </tr>
+              <tr>
+                <td class="tdleft"><label for="id_password">Admin Default Password</label></td>
+                <td class="tdright">{{ form.password }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="row ">
+            <div class="col-lg-5">
+              <button type="submit" class="editsubmitbtn">Request Account</button>
+            </div>
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-5">
+              <!-- <button type="button" class="editcancelbtn">Cancel</button> -->
+              <a href="{% url 'cadmindocaccounts' %}" class="button editcancelbtn">Back</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
+
+    <!-- <main>
+       <section class="page-section">
+        <div class="container">
+          <div style="min-height: 50px;"></div>
+          <div>
+            <h3 class="section-heading text-uppercase">Request Admin Account</h3>
+          </div>
+          <div class="row">
+            <div class="account">
+              <form>
+                <table border="0" class="editaccounttable">
+                  <tbody>
+                    <tr>
+                      <td class="tdleft"><label for="id_adminuser">Admin Username</label></td>
+                      <td class="tdright"><input id="id_adminuser" type="text" name="adminuser" maxlength="100" required class="inputaccount"></td>
+                    </tr>
+                    <tr>
+                      <td class="tdleft"><label for="id_adminname">Admin Name</label></td>
+                      <td class="tdright"><input id="id_adminname" type="text" name="adminname" maxlength="100" required class="inputaccount"></td>
+                    </tr>
+                    <tr>
+                      <td class="tdleft"><label for="id_password">Admin Default Password</label></td>
+                      <td class="tdright"><input id="id_password" type="password" name="password" maxlength="100" required class="inputaccount"></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="row ">
+                  <div class="col-lg-5">
+                    <button type="submit" class="editsubmitbtn">Request Account</button>
+                  </div>
+                  <div class="col-lg-2">
+                  </div>
+                  <div class="col-lg-5">
+                    <button type="button" class="editcancelbtn">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main> -->

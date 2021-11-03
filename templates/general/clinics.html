@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Clinics - MyHealth{% endblock title %}
+
+{% block headerlinks %}
+<script type="text/javascript">
+// function overlay(id) {
+//   el = document.getElementById("popup-" + id);
+//   el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+// }
+
+// $('#open-popup-6').click(function(){
+//     $('popupcontainer-6').show();
+// });
+// $('#close-popup-6').click(function(){
+//     $('popupcontainer-6').hide();
+// });
+
+
+</script>
+{% endblock %}
+
+{% block content %}
+<section class="page-section" id="healthfacility">
+  <div class="container">
+    <div style="min-height: 50px;"></div>
+    <div>
+      <h3 class="section-heading text-uppercase">Clinics</h3>
+    </div>
+    <form method="get">
+    <div class="row">
+        <div class="col-lg-4">
+          <div class="locationwrapper">
+            <p><label for="id_location">Location&nbsp;:&nbsp;</label>
+            <select name="location" id="inputlocation" class="inputlocation">
+              <option disabled selected value> -- Select Location -- </option>
+              <option value="all">All</option>
+              <option value="North">North</option>
+              <option value="South">South</option>
+              <option value="East">East</option>
+              <option value="West">West</option>
+              <option value="Central">Central</option>
+            </select></p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="locationwrapper">
+            <p><label for="specialist">Specialist &nbsp;:&nbsp;</label>
+            <select name="inputspecialist" id="specialist" class="inputlocation">
+              <option disabled selected value> -- Select Speciality -- </option>
+              {% for speciality in specialties %}
+                <option value="{{speciality.id}}">{{speciality}}</option>
+              {% endfor %}
+            </select>
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="locationwrapper">
+            <p><input type="submit" value="Search" class="searchsubmitbtn">
+            <a href="{% url 'clinics' %}" class="button searchsubmitbtn">Reload</a></p>
+          </div>
+        </div>
+      </div>
+    </form>
+    {% for clinic in clinics %}
+    <div class="row healthfacility">
+      <div class="col-lg-3 imgcenter">
+        {% if clinic.image %}
+          <img src="{{ clinic.image.url }}"  alt="{{ clinic.name }}" class="healthfacilityimg img-responsive">
+        {% else %}
+          <img src="{% static 'assets/img/HealthFacilityIcon.png' %}"  alt="Health Facility Image" class="healthfacilityimg img-responsive">
+        {% endif %}
+      </div>
+      <div class="col-lg-9">
+        <h4 class="hftitle">{{ clinic.name }}</h4>
+        <input type="hidden" name="{{ clinic.name }}" value="{{ clinic.location }}">
+        <div class="hfdesc">
+          <p>Opening Hours <br>
+          Weekday : {{ clinic.openinghours.weekdaystart|time:'H:i' }} - {{ clinic.openinghours.weekdayend|time:'H:i' }}<br>
+          Saturday : {{ clinic.openinghours.satstart|time:'H:i' }} - {{ clinic.openinghours.satend|time:'H:i' }}<br>
+          Sunday : {{ clinic.openinghours.sunstart|time:'H:i' }} - {{ clinic.openinghours.sunend|time:'H:i' }}<br>
+          Public Hoilday : {{ clinic.openinghours.phstart|time:'H:i' }} - {{ clinic.openinghours.phend|time:'H:i' }}<br></p>
+        </div>
+        <div class="row">
+          <div class="col-lg-8">
+            <h6 class="hfcontact">Address: {{ clinic.address }}</h6>
+            <h6 class="hfcontact">Phone: {{ clinic.phone }}</h6>
+            <h6 class="hfcontact">Email: {{ clinic.email }}</h6>
+            <h6 class="hfcontact">Rating: {{ clinic.rating }}</h6>
+          </div>
+          <div class="col-lg-4">
+            <!-- <button class="educationmaterials">Health Education Materials</button> -->
+            <a id="open-popup-{{ clinic.id }}" class="button educationmaterials" href="#popupcontainer-{{ clinic.id }}" 
+            data-reveal-id="exampleModal">Health Education Materials</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% for key, values in educationlist.items %}
+<div id="popupcontainer-{{ key }}" class="popupcontainer">
+  <div id="exampleModal" class="reveal-modal">
+    <div style="float: right;">
+      <a href='#' class="xbutton close-reveal-modal" id="close-popup-{{ key }}"> <i class="fa fa-times" aria-hidden="true"></i></a>
+    </div>
+    <table class="adminaccounttable">
+      <tr>
+        <th style="width:5%">S/N</th>
+        <th style="width:60%">Title</th>
+        <th style="width:20%">Date</th>
+        <th style="width:15%"></th>
+      </tr>      
+      {% for cliniceducation in values %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ cliniceducation.title }}</td>
+        <td>{{ cliniceducation.uploaddate|date:'d/m/Y' }}</td>
+        <td><a href="{{ cliniceducation.content.url }}" target="_new" class="button small-button greenbtn">View</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+{% endfor %}
+{% endblock content %}
+
+{% block footer %}
+<footer class="footer py-4">
+  <div class="container">
+      <div class="row align-items-center">
+          <div class="col-lg-2 text-lg-start MyHealth">MyHealth</div>
+          <div class="col-lg-4 text-lg-start">
+            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+              <li class="nav-item"><a class="nav-link" href="#">Support</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">FAQ</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Privacy Policy</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Terms of Use</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 my-3 my-lg-0 text-lg-start">
+            <div >Stay In Touch</div>
+            <br>
+            <div>
+              <a class="btn btn-fb btn-social mx-2" href="#!"><i class="fab fa-facebook-square"></i></a>
+              <a class="btn btn-twitter btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+              <a class="btn btn-linkin btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+              <a class="btn btn-whatsapp btn-social mx-2" href="#!"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 text-lg-start">
+              <div >Subscribe</div>
+              <br>
+              <div>
+                <form method="post">
+                  {% csrf_token %}
+                  {{ subform.email }}
+                  <button type="submit" class="Subscribebtn"><i class="far fa-envelope"></i></button>
+                </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</footer>
+{% endblock footer %}
+
+<!--     <main>
+      <section class="page-section" id="healthfacility">
+        <div class="container">
+          <div style="min-height: 50px;"></div>
+          <div>
+            <h3 class="section-heading text-uppercase">Clinics</h3>
+          </div>
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="locationwrapper">
+                <p><label for="id_location">Location&nbsp;:&nbsp;</label>
+                <select name="location" id="id_location" class="inputlocation" required>
+                  <option disabled selected value> -- Select Location -- </option>
+                  <option value="north">North</option>
+                  <option value="south">South</option>
+                  <option value="east">East</option>
+                  <option value="west">West</option>
+                  <option value="central">Central</option>
+                </select></p>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="locationwrapper">
+                <p><label for="specialist">Specialist &nbsp;:&nbsp;</label>
+                <input id="specialist" type="text" name="specialist" maxlength="100" required class="inputlocation"></p>
+              </div>
+            </div>
+          </div>
+          <div class="row healthfacility">
+            <div class="col-lg-3 imgcenter">
+              <img src="../assets/img/HealthFacilityIcon.png" alt="Clinic Image" class="healthfacilityimg img-responsive">
+            </div>
+            <div class="col-lg-9">
+              <h4 class="hftitle">Clinic Title</h4>
+              <div class="hfdesc">
+                <p>Clinic Description</p>
+              </div>
+              <div class="row">
+                <div class="col-lg-8">
+                  <h6 class="hfcontact">Address</h6>
+                  <h6 class="hfcontact">Phone</h6>
+                  <h6 class="hfcontact">Email</h6>
+                </div>
+                <div class="col-lg-4">
+                  <button class="educationmaterials">Health Education Materials</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row healthfacility">
+            <div class="col-lg-3 imgcenter">
+              <img src="../assets/img/HealthFacilityIcon.png" alt="Clinic Image" class="healthfacilityimg img-responsive">
+            </div>
+            <div class="col-lg-9">
+              <h4 class="hftitle">Clinic Title</h4>
+              <div class="hfdesc">
+                <p>Clinic Description</p>
+              </div>
+              <div class="row">
+                <div class="col-lg-8">
+                  <h6 class="hfcontact">Address</h6>
+                  <h6 class="hfcontact">Phone</h6>
+                  <h6 class="hfcontact">Email</h6>
+                </div>
+                <div class="col-lg-4">
+                  <button class="educationmaterials">Health Education Materials</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main> -->

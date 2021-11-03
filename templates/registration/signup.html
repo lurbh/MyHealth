@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up - MyHealth{% endblock title %}
+
+<!-- {% block navbar %}
+{% if user.is_authenticated %}
+<ul class="navbar-nav text-lg-start ms-auto py-4 py-lg-0">
+  <li class="nav-item"><a class="nav-link" href="#">Clinics</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Book An Appointment</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Appointments</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Account</a></li>
+  <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
+</ul>
+{% else %}
+<ul class="navbar-nav text-lg-start ms-auto py-4 py-lg-0">
+  <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Clinics</a></li>
+  <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">About Us</a></li>
+  <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Contact Us</a></li>
+  <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+</ul>
+{% endif %}
+{% endblock navbar %} -->
+
+{% block content %}
+<section class="page-section" id="login">
+  <div class="container">
+    <div style="min-height: 100px;"></div>
+    <div class="text-center">
+        <h3 class="section-heading">Create Account</h3>
+    </div>
+    <div style="min-height: 75px;"></div>
+    <form id="signupForm" method="post">
+      {% csrf_token %}
+      <div class="row text-center">
+        <div><table border="0" class="formtable">
+          <tr>
+            <td class="tdleft">{{ form.email.label_tag }}</td>
+            <td class="tdright">{{ form.email }}</td>
+          </tr>
+          <tr>
+            <td class="tdleft">{{ form.username.label_tag }}</td>
+            <td class="tdright">{{ form.username }}</td>
+          </tr>
+          <tr>
+            <td class="tdleft">{{ form.name.label_tag }}</td>
+            <td class="tdright">{{ form.name }}</td>
+          </tr>
+          <tr>
+            <td class="tdleft">{{ form.phone.label_tag }}</td>
+            <td class="tdright">{{ form.phone }}</td>
+          </tr>
+          <tr>
+            <td class="tdleft">{{ form.password1.label_tag }}</td>
+            <td class="tdright">{{ form.password1 }}</td>
+          </tr>
+          <tr><td></td><td>{{ form.password1.help_text  }}</td></tr>
+          <tr>
+            <td class="tdleft">{{ form.password2.label_tag }}</td>
+            <td class="tdright">{{ form.password2 }}</td>
+          </tr>
+        </table></div>
+        <!-- {{ form.as_p }} -->
+        <div>
+          <br>
+          <button type="submit" class="loginbtn">Create Account</button>
+        </div>
+    </div>
+    </form>
+  </div>
+</section>
+{% endblock content %}
+
+{% block footer %}
+<footer class="footer py-4">
+  <div class="container">
+      <div class="row align-items-center">
+          <div class="col-lg-2 text-lg-start MyHealth">MyHealth</div>
+          <div class="col-lg-4 text-lg-start">
+            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+              <li class="nav-item"><a class="nav-link" href="#">Support</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">FAQ</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Privacy Policy</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Terms of Use</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 my-3 my-lg-0 text-lg-start">
+            <div >Stay In Touch</div>
+            <br>
+            <div>
+              <a class="btn btn-fb btn-social mx-2" href="#!"><i class="fab fa-facebook-square"></i></a>
+              <a class="btn btn-twitter btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+              <a class="btn btn-linkin btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+              <a class="btn btn-whatsapp btn-social mx-2" href="#!"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 text-lg-start">
+              <div >Subscribe</div>
+              <br>
+              <div>
+                <input class="Subscribe" type="text" name="">
+                <button class="Subscribebtn"><i class="far fa-envelope"></i></button>
+              </div>
+          </div>
+      </div>
+  </div>
+</footer>
+{% endblock footer %}
+
+<!--     <main>
+      <section class="page-section">
+            <div class="container">
+              <div style="min-height: 100px;"></div>
+                <div class="text-center">
+                    <h3 class="section-heading">Create Account</h3>
+                </div>
+                <div style="min-height: 75px;"></div>
+                <form id="loginForm">
+                  <div class="row text-center">
+                      <div><table border="0" class="formtable">
+                        <tr>
+                          <td class="tdleft"><label for="id_email">Email</label>&nbsp;</td>
+                          <td class="tdright"><input id="id_email" type="text" name="email" maxlength="100" required class="inputlogin"></td>
+                        </tr>
+                        <tr>
+                          <td class="tdleft"><label for="id_username">Username</label>&nbsp;</td>
+                          <td class="tdright"><input id="id_username" type="text" name="username" maxlength="100" required class="inputlogin"></td>
+                        </tr>
+                        <tr>
+                          <td class="tdleft"><label for="id_name">Name</label>&nbsp;</td>
+                          <td class="tdright"><input id="id_name" type="text" name="name" maxlength="100" required class="inputlogin"></td>
+                        </tr>
+                        <tr>
+                          <td class="tdleft"><label for="id_password">Password</label>&nbsp;</td>
+                          <td class="tdright"><input id="id_password" type="password" name="password" maxlength="100" required class="inputlogin"></td>
+                        </tr>
+                        <tr>
+                          <td class="tdleft"><label for="id_password2">Confirm Password</label>&nbsp;</td>
+                          <td class="tdright"><input id="id_password2" type="password" name="email" maxlength="100" required class="inputlogin"></td>
+                        </tr>
+                      </table></div>
+                      <div>
+                        <br>
+                        <button type="submit" class="loginbtn">Create Account</button>
+                      </div>
+                  </div>
+                </form>
+            </div>
+        </section>
+    </main> -->

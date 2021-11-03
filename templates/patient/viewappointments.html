@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+{% block title %}Upcoming Appointments - MyHealth{% endblock title %}
+
+{% block content %}
+<section class="page-section" id="bookappointment">
+  <div class="container">
+    <div style="min-height: 50px;"></div>
+    <div>
+      <h3 class="section-heading text-uppercase">Upcoming Appointments</h3>
+    </div>
+    <div class="row">
+      <div class="main-background" style="width:100%;">
+        <div style="overflow-y:auto;overflow-x:auto;">
+          <table class="adminaccounttable">
+            <tr>
+              <th style="width:5%;">S/N</th>
+              <th style="width:20%;">Clinic</th>
+              <th style="width:15%;">Doctor</th>
+              <th style="width:15%;">Type</th>
+              <th style="width:12%;">Date</th>
+              <th style="width:6%;">Time</th>
+              <th style="width:9%;">Confirm</th>
+              <th style="width:9%;">Edit</th>
+              <th style="width:9%;">Cancel</th>
+            </tr>
+            {% for appt in appointments %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ appt.clinicid.name }}</td>
+              {% if appt.type.type != "Consultation" %}
+                <td>{{ appt.doctorid.user_account.name }}</td>
+              {% else %}
+                <td>-- N/A --</td>
+              {% endif %}
+              <td>{{ appt.type }}</td>
+              <td>{{ appt.slot.datetimestart|date:'d/m/Y' }}</td>
+              <td>{{ appt.slot.datetimestart|date:'H:i' }}</td>
+              {% if appt.canconfirm ==  True and appt.confirm == False %}
+              <td><a href="{% url 'confirmappointment' appt.id %}" class="button small-button greenbtn">Confirm</a></td>
+              {% else %}
+              <td><a href="{% url 'confirmappointment' appt.id %}" class="button small-button greenbtn disabled">Confirm</a></td>
+              {% endif %}
+              
+              <td><a href="{% url 'editappointment' appt.id %}" class="button small-button yellowbtn">Edit</a></td>
+              <td><a href="{% url 'cancelappointment' appt.id %}" class="button small-button redbtn"  
+                onclick="return confirm('Are you sure you want to cancel this Appointment?');">Cancel</a></td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div> 
+  </div>
+</section>
+{% endblock content %}
+
+{% block footer %}
+<footer class="footer py-4">
+  <div class="container">
+      <div class="row align-items-center">
+          <div class="col-lg-2 text-lg-start MyHealth">MyHealth</div>
+          <div class="col-lg-4 text-lg-start">
+            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+              <li class="nav-item"><a class="nav-link" href="#">Support</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">FAQ</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Privacy Policy</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Terms of Use</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 my-3 my-lg-0 text-lg-start">
+            <div >Stay In Touch</div>
+            <br>
+            <div>
+              <a class="btn btn-fb btn-social mx-2" href="#!"><i class="fab fa-facebook-square"></i></a>
+              <a class="btn btn-twitter btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+              <a class="btn btn-linkin btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+              <a class="btn btn-whatsapp btn-social mx-2" href="#!"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 text-lg-start">
+              <div >Subscribe</div>
+              <br>
+              <div>
+                <form method="post">
+                  {% csrf_token %}
+                  {{ subform.email }}
+                  <button type="submit" class="Subscribebtn"><i class="far fa-envelope"></i></button>
+                </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</footer>
+{% endblock footer %}
+
+   <!--  <main>
+      <section class="page-section" id="bookappointment">
+         <div class="container">
+          <div style="min-height: 50px;"></div>
+          <div>
+            <h3 class="section-heading text-uppercase">Upcoming Appointments</h3>
+          </div>
+          <div class="row appointments">
+            <div class="appointmentscover">
+              <table border="0" class="appointmenttable">
+                <thead style="font-weight: 550;">
+                  <td style="width:5%;">S/N</td>
+                  <td style="width:20%;">Clinic</td>
+                  <td style="width:15%;">Doctor</td>
+                  <td style="width:15%;">Type</td>
+                  <td style="width:10%;">Date</td>
+                  <td style="width:5%;">Time</td>
+                  <td style="width:10%;">Confirm</td>
+                  <td style="width:10%;">Edit</td>
+                  <td style="width:10%;">Cancel</td>
+                </thead>
+                <tr class="appointmentrow">
+                  <td>1</td>
+                  <td>Clinic 1</td>
+                  <td>Dr. Marco Polo</td>
+                  <td>Standard Consulation</td>
+                  <td>25/9/2021</td>
+                  <td>15:00</td>
+                  <td class="tablebutton"><button class="confirmbtn">Confirm</button></td>
+                  <td class="tablebutton"><button class="editbtn">Edit</button></td>
+                  <td class="tablebutton"><button class="cancelbtn">Cancel</button></td>
+                </tr>
+                <tr class="appointmentrow">
+                  <td>2</td>
+                  <td>Clinic 1</td>
+                  <td>Dr. Marco Polo</td>
+                  <td>Standard Consulation</td>
+                  <td>25/9/2021</td>
+                  <td>15:00</td>
+                  <td class="tablebutton"><button class="confirmbtn">Confirm</button></td>
+                  <td class="tablebutton"><button class="editbtn">Edit</button></td>
+                  <td class="tablebutton"><button class="cancelbtn">Cancel</button></td>
+                </tr>
+                <tr class="appointmentrow">
+                  <td>3</td>
+                  <td>Clinic 1</td>
+                  <td>Dr. Marco Polo</td>
+                  <td>Standard Consulation</td>
+                  <td>25/9/2021</td>
+                  <td>15:00</td>
+                  <td class="tablebutton"><button class="confirmbtn">Confirm</button></td>
+                  <td class="tablebutton"><button class="editbtn">Edit</button></td>
+                  <td class="tablebutton"><button class="cancelbtn">Cancel</button></td>
+                </tr>
+                <tr class="appointmentrow">
+                  <td>4</td>
+                  <td>Clinic 1</td>
+                  <td>Dr. Marco Polo</td>
+                  <td>Standard Consulation</td>
+                  <td>25/9/2021</td>
+                  <td>15:00</td>
+                  <td class="tablebutton"><button class="confirmbtn">Confirm</button></td>
+                  <td class="tablebutton"><button class="editbtn">Edit</button></td>
+                  <td class="tablebutton"><button class="cancelbtn">Cancel</button></td>
+                </tr>
+                <tr class="appointmentrow">
+                  <td>5</td>
+                  <td>Clinic 1</td>
+                  <td>Dr. Marco Polo</td>
+                  <td>Standard Consulation</td>
+                  <td>25/9/2021</td>
+                  <td>15:00</td>
+                  <td class="tablebutton"><button class="confirmbtn">Confirm</button></td>
+                  <td class="tablebutton"><button class="editbtn">Edit</button></td>
+                  <td class="tablebutton"><button class="cancelbtn">Cancel</button></td>
+                </tr>
+              </table>
+            </div>
+          </div> 
+        </div>
+      </section>
+    </main> -->

@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Clinic Admin Appointments - MyHealth{% endblock title %}
+
+{% block content %}
+<section class="page-section">
+  <div class="container">
+    <div style="min-height: 50px;"></div>
+    <div>
+      <h3 class="section-heading text-uppercase">Appointments</h3>
+    </div>
+    <div class="row">
+      <div class="main-background" style="width:100%;">
+      <div style="overflow-y:auto;">
+        <table class="adminaccounttable">
+          <tr>
+            <th style="width:5%">S/N</th>
+            <th style="width:20%">Name</th>
+            <th style="width:15%">Type</th>
+            <th style="width:15%">Doctor</th>
+            <th style="width:15%">Date</th>
+            <th style="width:10%">Time</th>
+            <th style="width:10%"></th>
+            <th style="width:10%"></th>
+          </tr>
+          {% for appt in appointments %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ appt.patientid.user_account.name }}</td>
+            <td>{{ appt.type }}</td>
+            {% if appt.type.type !=  word %}
+              <td>{{ appt.doctorid.user_account.name }}</td>
+            {% else %}
+              <td>-- N/A --</td>
+            {% endif %}
+            <td>{{ appt.slot.datetimestart|date:'d/m/Y' }}</td>
+            <td>{{ appt.slot.datetimestart|date:'H:i' }}</td>
+            <td><a href="{% url 'cadmineditappointment' appt.id %}" class="button small-button yellowbtn">Edit</a></td>
+            <td><a href="{% url 'cadmindeleteappointment' appt.id %}" class="button small-button redbtn"  
+                onclick="return confirm('Are you sure you want to delete this appointment?');">Delete</a></td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <br><!-- <input type="button" class="addappointmentbutton" value="Add Appointment"> -->
+      <a href="{% url 'cadminaddappointment' %}" class="button addappointmentbutton">Add Appointment</a>
+    </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
+
+    <!-- <main>
+      <section class="page-section">
+        <div class="container">
+          <div style="min-height: 50px;"></div>
+          <div>
+            <h3 class="section-heading text-uppercase">Appointments</h3>
+          </div>
+          <div class="row">
+            <div class="main-background" style="width:100%;">
+            <div style="overflow-y:auto;">
+              <table class="adminaccounttable">
+                <tr>
+                  <th style="width:5%">S/N</th>
+                  <th style="width:20%">Name</th>
+                  <th style="width:15%">Type</th>
+                  <th style="width:15%">Doctor</th>
+                  <th style="width:15%">Date</th>
+                  <th style="width:9%">Time</th>
+                  <th style="width:7%"></th>
+                  <th style="width:7%"></th>
+                  <th style="width:7%"></th>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>Bob the Builder</td>
+                  <td>Consultation</td>
+                  <td>-- N/A --</td>
+                  <td>21/12/2021</td>
+                  <td>15:20</td>
+                  <td><input type="button" class="small-button" value="View" style="background-color:#73FF04;"></td>
+                  <td><input type="button" class="small-button" value="Edit" style="background-color:#DCFF04;"></td>
+                  <td><input type="button" class="small-button" value="Delete" style="background-color:#FF0404;"></td>
+                </tr>
+              </table>
+            </div>
+            <br><input type="button" class="addappointmentbutton" value="Add Appointment">
+          </div>
+          </div>
+        </div>
+      </section>
+    </main> -->

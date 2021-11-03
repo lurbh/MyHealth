@@ -1,0 +1,326 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Clinic Admin Edit Appointment - MyHealth{% endblock title %}
+
+{% block content %}
+<section class="page-section">
+  <div class="container">
+    <div style="min-height: 50px;"></div>
+    <div>
+      <h3 class="section-heading text-uppercase">Edit Appointment</h3>
+    </div>
+    <div class="row">
+      <form class="medicaladminappointment" method="post">
+        {% csrf_token %}
+        {% if form.errors %}
+          {% for field in form %}
+              {% for error in field.errors %}
+                  <div class="alert alert-danger">
+                      <strong>{{ error|escape }}</strong>
+                  </div>
+              {% endfor %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+              <div class="alert alert-danger">
+                  <strong>{{ error|escape }}</strong>
+              </div>
+          {% endfor %}
+        {% endif %}
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {{ form.clinicid.as_hidden }}
+        <table border="0" class="formtableoverview">
+          <tbody>
+            <tr>
+              <td class="tableappointmentleft"><label for="appt_name">Name: </label>&nbsp;</td>
+              <td>{{ form.patientid }}</td>
+            </tr>
+            <tr>
+              <td class="tableappointmentleft"><label for="appt_type">Type: </label>&nbsp;</td>
+              <td>{{ form.type }}</td>
+            </tr>
+            <tr>
+              <td class="tableappointmentleft"><label for="inputdoctor">Doctor: </label>&nbsp;</td>
+              <td>{{ form.doctorid }}</td>
+            </tr>
+             <tr>
+              <td class="tableappointmentleft"><label for="acct_name">Date: </label>&nbsp;</td>
+              <td>
+                <div class="row daterow">
+                  <div class="col-lg-3">
+                    <select name="appt-day" id="id_appt-day" class="inputdayad" required>
+                      {% for d in day  %}
+                        {% if d == slotdetails.day %}
+                          <option selected value="{{ d }}">{{ d }}</option>
+                        {% else %}
+                          <option value="{{ d }}">{{ d }}</option>
+                        {% endif %}
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="col-lg-1"><label class="datelabel">/</label></div>
+                  <div class="col-lg-3">
+                    <select name="appt-month" id="id_appt-month" class="inputmonthad" required>
+                      {% for m in month  %}
+                        {% if m == slotdetails.month %}
+                          <option selected value="{{ m }}">{{ m }}</option>
+                        {% else %}
+                          <option value="{{ m }}">{{ m }}</option>
+                        {% endif %}
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="col-lg-1"><label class="datelabel">/</label></div>
+                  <div class="col-lg-4">
+                    <select name="appt-year" id="id_appt-year" class="inputyearad" required>
+                      {% for y in year  %}
+                        {% if y == slotdetails.year %}
+                          <option selected value="{{ y }}">{{ y }}</option>
+                        {% else %}
+                          <option value="{{ y }}">{{ y }}</option>
+                        {% endif %}
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableappointmentleft"><label for="acct_name">Time: </label>&nbsp;</td>
+              <td>
+                <div class="row timerow">
+                  <div class="col-lg-5">
+                    <select name="appt-hour" id="id_appt-hour" class="inputhourad" required>
+                      {% for h in hour  %}
+                        {% if h == slotdetails.hour %}
+                          <option selected value="{{ h }}">{{ h }}</option>
+                        {% else %}
+                          <option value="{{ h }}">{{ h }}</option>
+                        {% endif %}
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="col-lg-1"><label class="datelabel">:</label></div>
+                  <div class="col-lg-5">
+                    <select name="appt-min" id="id_appt-min" class="inputminad" required>
+                      {% for i in range  %}
+                        {% if i == 0 %}
+                          {% if i == slotdetails.min %}
+                            <option value="0">00</option>
+                          {% else %}
+                            <option value="0">00</option>
+                          {% endif %}
+                        {% else %}
+                          {% if i == slotdetails.min %}
+                            <option selected value="{% widthratio min 1 i %}">{% widthratio min 1 i %}</option>
+                          {% else %}
+                            <option value="{% widthratio min 1 i %}">{% widthratio min 1 i %}</option>
+                          {% endif %}
+                        {% endif %}
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="tableappointmentleft"><label for="inputdoctor">Room: </label>&nbsp;</td>
+              <td>{{ form.room }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row ">
+          <div class="col-lg-5">
+            <button type="submit" class="editsubmitbtn">Edit Appointment</button>
+          </div>
+          <div class="col-lg-2">
+          </div>
+          <div class="col-lg-5">
+            <!-- <button type="button" class="editcancelbtn">Back</button> -->
+            <a href="{% url 'cadminappointments' %}" class="button editcancelbtn">Back</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock content %}
+
+{% block footerscripts %}
+<script src="{% static 'js/appointment.js' %}"></script>
+{% endblock %}
+
+
+    <!-- <main>
+      <section class="page-section">
+        <div class="container">
+          <div style="min-height: 50px;"></div>
+          <div>
+            <h3 class="section-heading text-uppercase">Edit Appointment</h3>
+          </div>
+          <div class="row">
+            <form class="medicaladminappointment">
+              <table border="0" class="formtableoverview">
+                <tbody>
+                  <tr>
+                    <td class="tableappointmentleft"><label for="appt_appno">Appointment Number: </label>&nbsp;</td>
+                    <td><input class="inputappointment" type="text" id="appt_appno" name="appt_appno" value="1"></td>
+                  </tr>
+                  <tr>
+                    <td class="tableappointmentleft"><label for="appt_name">Name: </label>&nbsp;</td>
+                    <td><input class="inputappointment" type="text" id="appt_name" name="appt_name" value="Bob the Builder"></td>
+                  </tr>
+                  <tr>
+                    <td class="tableappointmentleft"><label for="appt_type">Type: </label>&nbsp;</td>
+                    <td><select name="appt_type" id="appt_type" class="inputappointment">
+                      <option value="consultation">Consultation</option>
+                      <option value="specialist">Specialist</option>
+                      <option value="pharmacy">Pharmacy</option>
+                      <option value="lab-test">Lab Test</option>
+                    </select></td>
+                  </tr>
+                  <tr>
+                    <td class="tableappointmentleft"><label for="inputdoctor">Doctor: </label>&nbsp;</td>
+                    <td><select name="inputdoctor" id="inputdoctor" class="inputappointment">
+                      <option value="dr1">-- N/A --</option>
+                      <option value="dr1">Dr Marco Polo</option>
+                    </select></td>
+                  </tr>
+                  <tr>
+                    <td class="tableappointmentleft"><label for="acct_name">Date: </label>&nbsp;</td>
+                    <td>
+                      <div class="row daterow">
+                        <div class="col-lg-3">
+                          <select name="appt-day" id="id_appt-day" class="inputdayad" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                          </select>
+                        </div>
+                        <div class="col-lg-1"><label class="datelabel">/</label></div>
+                        <div class="col-lg-3">
+                          <select name="appt-month" id="id_appt-month" class="inputmonthad" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                          </select>
+                        </div>
+                        <div class="col-lg-1"><label class="datelabel">/</label></div>
+                        <div class="col-lg-4">
+                          <select name="appt-year" id="id_appt-year" class="inputyearad" required>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                          </select>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="tableappointmentleft"><label for="acct_name">Time: </label>&nbsp;</td>
+                    <td>
+                      <div class="row timerow">
+                        <div class="col-lg-5">
+                          <select name="appt-hour" id="id_appt-hour" class="inputhourad" required>
+                            <option value="08">8</option>
+                            <option value="09">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                          </select>
+                        </div>
+                        <div class="col-lg-1"><label class="datelabel">:</label></div>
+                        <div class="col-lg-5">
+                          <select name="appt-min" id="id_appt-min" class="inputminad" required>
+                            <option value="00">00</option>
+                            <option value="15">15</option>
+                            <option value="30">30</option>
+                            <option value="45">45</option>
+                          </select>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="tableappointmentleft"><label for="inputdoctor">Room: </label>&nbsp;</td>
+                    <td><select name="inputdoctor" id="inputdoctor" class="inputappointment">
+                      <option disabled selected value> -- Select a Room -- </option>
+                      <option value="rm1">Room 1</option>
+                      <option value="rm2">Room 2</option>
+                      <option value="rm3">Room 3</option>
+                      <option value="rm4">Room 4</option>
+                    </select></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="row ">
+                <div class="col-lg-5">
+                  <button type="submit" class="editsubmitbtn">Edit Appointment</button>
+                </div>
+                <div class="col-lg-2">
+                </div>
+                <div class="col-lg-5">
+                  <button type="button" class="editcancelbtn">Back</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main> -->

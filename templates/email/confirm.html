@@ -1,0 +1,24 @@
+<div style="text-align: center;">
+  <h1>Appointment Ready</h1>
+  <h5>Appointment is ready to be confirmed</h5>
+  <br/>
+  <h4>for {{ name }}</h4>
+  <hr/>
+  <table border="0" style="width:50%;margin: 0 auto;">
+    <tr>
+      <td style="width:30%">What</td>
+      <td style="width:70%">Appointment: {{ appointment }}</td>
+    </tr>
+    <tr>
+      <td style="width:30%">When</td>
+      <td style="width:70%">{{ when }}</td>
+    </tr>
+    <tr>
+      <td style="width:30%">Where</td>
+      <td style="width:70%">{{ where }}<br>
+      {{ room }}</td>
+    </tr>
+  </table>
+  <p>Please head to MyHealth website to confirm the appointment. Once the appointment is confirmed as email will sent out to you with the calender invite.</p>
+  <p>Head to MyHealth <a href="http://127.0.0.1:8000/appointments/">here</a></p>
+</div>
