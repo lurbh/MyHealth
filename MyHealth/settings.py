@@ -27,7 +27,13 @@ SECRET_KEY = 'django-insecure-wylyio30rd*)k1)h1pn0w@g-uz@roou3to15%^w(j7)&j$c686
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['myhealth-dev.ap-southeast-1.elasticbeanstalk.com', '127.0.0.1','myhealth2-dev.ap-southeast-1.elasticbeanstalk.com','172.31.22.137']
+ALLOWED_HOSTS = [
+    'myhealth-dev.ap-southeast-1.elasticbeanstalk.com', 
+    '127.0.0.1',
+    'myhealth2-dev.ap-southeast-1.elasticbeanstalk.com',
+    '172.31.22.137',
+    '172.31.3.102'
+]
 
 
 # Application definition
@@ -79,6 +85,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'MyHealth.wsgi.application'
 
+env = environ.Env()
+environ.Env.read_env()
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -97,10 +105,13 @@ if 'RDS_DB_NAME' in os.environ:
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': env('RDS_DB_NAME'),
+            'USER': env('RDS_USERNAME'),
+            'PASSWORD': env('RDS_PASSWORD'),
+            'HOST': env('RDS_HOSTNAME'),
+            'PORT': env('RDS_PORT'),
         }
-    }
 
 
 # Password validation
@@ -135,9 +146,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-env = environ.Env()
-environ.Env.read_env()
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
