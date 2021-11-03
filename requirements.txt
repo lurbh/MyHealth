@@ -30,6 +30,7 @@ jmespath==0.10.0
 korean-lunar-calendar==0.2.1
 pathspec==0.5.9
 Pillow==8.4.0
+psycopg2-binary==2.9.1
 pyasn1==0.4.8
 PyMeeus==0.5.11
 pypiwin32==223
