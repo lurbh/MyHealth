@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-wylyio30rd*)k1)h1pn0w@g-uz@roou3to15%^w(j7)&j$c686
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['MyHealth.ap-southeast-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['MyHealth.ap-southeast-1.elasticbeanstalk.com', '172.31.28.36']
 
 
 # Application definition
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'doctor',
     'clinicadmin',
     'systemadmin',
+    'storages',
     #'django_q',
 ]
 
@@ -82,12 +83,24 @@ WSGI_APPLICATION = 'MyHealth.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if 'RDS_DB_NAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
 
 # Password validation
@@ -147,8 +160,14 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+### Django storages - use this for production
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+### Django storages - use in production
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 #EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 #EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
@@ -156,16 +175,28 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 #DEFAULT_FROM_EMAIL = 'test@test.com'
-DEFAULT_FROM_EMAIL = env('EMAIL_HOST_USER')
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = env('EMAIL_HOST')
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+if 'EMAIL_HOST' in os.environ:
+  DEFAULT_FROM_EMAIL = os.environ['EMAIL_HOST_USER']
+  EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+  EMAIL_HOST = os.environ['EMAIL_HOST']
+  EMAIL_PORT = 587
+  EMAIL_USE_TLS = True
+  EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+  EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+else:
+  DEFAULT_FROM_EMAIL = env('EMAIL_HOST_USER')
+  EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+  EMAIL_HOST = env('EMAIL_HOST')
+  EMAIL_PORT = 587
+  EMAIL_USE_TLS = True
+  EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+  EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
 #Q_CLUSTER = {
 #    "name": "createslots",
 #    "orm": "default",  # Use Django's ORM + database for broker
 #}
+
+if 'AWS_ACCESS_KEY_ID' in os.environ:
+    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
