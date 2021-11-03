@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'MyHealth.wsgi.application'
 if 'RDS_DB_NAME' in os.environ:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': os.environ['RDS_DB_NAME'],
             'USER': os.environ['RDS_USERNAME'],
             'PASSWORD': os.environ['RDS_PASSWORD'],
@@ -154,15 +154,25 @@ AUTH_USER_MODEL = 'users.BaseUser'
 LOGIN_REDIRECT_URL = 'redirect'
 LOGOUT_REDIRECT_URL = 'home'
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_URL = 'static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
 ### Django storages - use this for production
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 ### Django storages - use in production
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+#EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+#EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
+
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 #DEFAULT_FROM_EMAIL = 'test@test.com'
 if 'EMAIL_HOST' in os.environ:
@@ -190,5 +200,3 @@ else:
 if 'AWS_ACCESS_KEY_ID' in os.environ:
     AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
     AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-
-SECURE_SSL_REDIRECT = False
