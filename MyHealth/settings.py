@@ -112,6 +112,7 @@ else:
             'HOST': env('RDS_HOSTNAME'),
             'PORT': env('RDS_PORT'),
         }
+    }
 
 
 # Password validation
@@ -211,3 +212,4 @@ if 'AWS_ACCESS_KEY_ID' in os.environ:
 
 if 'AWS_STORAGE_BUCKET_NAME' in os.environ:
     AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+    AWS_S3_REGION_NAME = os.environ['AWS_S3_REGION_NAME']
