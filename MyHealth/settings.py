@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-wylyio30rd*)k1)h1pn0w@g-uz@roou3to15%^w(j7)&j$c686
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['MyHealth.ap-southeast-1.elasticbeanstalk.com', '127.0.0.1']
+ALLOWED_HOSTS = ['MyHealth.ap-southeast-1.elasticbeanstalk.com', '127.0.0.1','myhealth2-dev.ap-southeast-1.elasticbeanstalk.com']
 
 
 # Application definition
