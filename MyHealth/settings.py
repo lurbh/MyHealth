@@ -14,6 +14,10 @@ from pathlib import Path
 import os
 import environ
 
+
+env = environ.Env()
+environ.Env.read_env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,12 +26,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-wylyio30rd*)k1)h1pn0w@g-uz@roou3to15%^w(j7)&j$c686'
+if 'DJANGO_SECRET_KEY' in os.environ:
+  SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+else:
+  SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    # 'django-env.eba-frp38562.ap-southeast-1.elasticbeanstalk.com',
+    # 'MyHealth.ap-southeast-1.elasticbeanstalk.com',
+    '172.31.1.159'
+]
 
 
 # Application definition
@@ -45,7 +57,7 @@ INSTALLED_APPS = [
     'doctor',
     'clinicadmin',
     'systemadmin',
-    #'django_q',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -79,6 +91,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'MyHealth.wsgi.application'
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 15 * 60   
+SESSION_SAVE_EVERY_REQUEST = True 
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -86,10 +101,11 @@ WSGI_APPLICATION = 'MyHealth.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
+#
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -123,12 +139,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-env = environ.Env()
-environ.Env.read_env()
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+
+STATIC_URL = '/static/'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage' 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -146,29 +162,33 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')Run the command: py manage.py collectstatic to collect static files.
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage' 
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+if 'EMAIL_HOST' in os.environ:
+  DEFAULT_FROM_EMAIL = os.environ['EMAIL_HOST_USER']
+  EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+  EMAIL_HOST = os.environ['EMAIL_HOST']
+  EMAIL_PORT = 587
+  EMAIL_USE_TLS = True
+  EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+  EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+else:
+  DEFAULT_FROM_EMAIL = env('EMAIL_HOST_USER')
+  EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+  EMAIL_HOST = env('EMAIL_HOST')
+  EMAIL_PORT = 587
+  EMAIL_USE_TLS = True
+  EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+  EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
-#EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-#EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
-
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-#DEFAULT_FROM_EMAIL = 'test@test.com'
-DEFAULT_FROM_EMAIL = env('EMAIL_HOST_USER')
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = env('EMAIL_HOST')
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-
-#Q_CLUSTER = {
-#    "name": "createslots",
-#    "orm": "default",  # Use Django's ORM + database for broker
-#}
+# if 'AWS_ACCESS_KEY_ID' in os.environ:
+    # AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    # AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+    # AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+    # AWS_S3_REGION_NAME = os.environ['AWS_S3_REGION_NAME']
+# else:
+    # AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+    # AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+    # AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+    # AWS_S3_REGION_NAME = env('AWS_S3_REGION_NAME')
